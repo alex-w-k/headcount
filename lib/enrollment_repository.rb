@@ -19,12 +19,11 @@ class EnrollmentRepository
   def load_format
   end
 
-  def find_by_name(name)
-    @enrollments.find do |enrollment|
-      enrollment.name == name
-    end
-
-  end
+  # def find_by_name(name)
+  #   @enrollments.find do |enrollment|
+  #     enrollment.name == name
+  #   end
+  # end
 
   # def find_all_matching
   #   @enrollments.find_all do |enrollment|
@@ -33,5 +32,5 @@ class EnrollmentRepository
   # end
 end
 
-binding.pry
-""
+# binding.pry
+# ""

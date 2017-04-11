@@ -5,9 +5,10 @@ class District
 
   def initialize(args)
     @name = args[:name]
-    @year = args[:timeframe]
-    @data_format = args[:dataformat]
-    @data = args[:data]
+    @enrollment = {}
+    # @year = args[:timeframe]
+    # @data_format = args[:dataformat]
+    # @data = args[:data]
   end
 
 end

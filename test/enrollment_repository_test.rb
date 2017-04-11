@@ -19,13 +19,13 @@ class EnrollmentRepositoryTest < Minitest::Test
                                             }})
   end
 
-  def test_it_can_find_by_name
-    @er.load_data({ :enrollment => { :kindergarten => './data/Kindergartners in full-day program.csv' 
-                                            }})
+  # def test_it_can_find_by_name
+  #   @er.load_data({ :enrollment => { :kindergarten => './data/Kindergartners in full-day program.csv' 
+  #                                           }})
 
-    assert_instance_of Enrollment, @er.find_by_name('ACADEMY 20')
-    assert_equal 'ACADEMY 20', @er.find_by_name('ACADEMY 20').name
-  end
+  #   assert_instance_of Enrollment, @er.find_by_name('ACADEMY 20')
+  #   assert_equal 'ACADEMY 20', @er.find_by_name('ACADEMY 20').name
+  # end
 
   # def test_it_can_find_all_matching
   #   @er.load_data({ :enrollment => { :kindergarten => './data/Kindergartners in full-day program.csv' 
