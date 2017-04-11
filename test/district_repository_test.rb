@@ -32,7 +32,8 @@ class DistrictRepositoryTest < Minitest::Test
                                             }})
 
     assert_instance_of Array, @dr.find_all_matching('ACADEMY 20')
-    assert_equal 11, @dr.find_all_matching('ACADEMY 20').length
+    assert_equal 1, @dr.find_all_matching('ACADEMY 20').length
+    assert_equal 7, @dr.find_all_matching('WE').length
   end
 
 end

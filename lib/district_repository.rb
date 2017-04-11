@@ -26,8 +26,9 @@ class DistrictRepository
   end
 
   def find_all_matching(name)
-    @districts.find_all do |district|
-      district.name == name
+    district_names = @districts.collect do |district|
+      district.name.upcase
     end
+    district_names.uniq.grep(/#{name}/)
   end
 end
