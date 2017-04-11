@@ -1,27 +1,27 @@
 require 'pry'
 require 'csv'
-class DistrictRepository
-  attr_reader :name, :year, :format, :data
+require './lib/district/'
 
-  def load_data
-    contents = CSV.open("./data/Kindergartners in full-day program.csv",
-                        {headers: true, 
-                         header_converters: :symbol})
-    @name = contents.collect do |row|
-      row[:location]
+class DistrictRepository
+  attr_reader :districts
+
+  def load_data(args)
+    enrollment = args[:enrollment]
+    data_set = enrollment[:kindergarten]
+    contents = CSV.open(data_set, {headers: true, header_converters: :symbol})
+    @districts = contents.collect do |row|
+      District.new(row)
     end
     contents
   end
 
   def load_format
-    load_data.each do |row|
-      format = row[:dataformat]
-    end
-    format
   end
 
   def find_by_name(name)
-    
+    @districts.find do |district|
+      district.location == name
+    end
 
   end
 
