@@ -1,6 +1,6 @@
 require 'pry'
 require 'csv'
-require './lib/district/'
+require_relative 'district'
 
 class DistrictRepository
   attr_reader :districts
@@ -23,10 +23,11 @@ class DistrictRepository
     @districts.find do |district|
       district.name == name
     end
-
   end
 
-  def find_all_matching
-
+  def find_all_matching(name)
+    @districts.find_all do |district|
+      district.name == name
+    end
   end
 end

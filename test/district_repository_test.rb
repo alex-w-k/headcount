@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/district_repository'
+require_relative '../lib/district_repository'
 
 class DistrictRepositoryTest < Minitest::Test
 
@@ -25,6 +25,14 @@ class DistrictRepositoryTest < Minitest::Test
 
     assert_instance_of District, @dr.find_by_name('ACADEMY 20')
     assert_equal 'ACADEMY 20', @dr.find_by_name('ACADEMY 20').name
+  end
+
+  def test_it_can_find_all_matching
+    @dr.load_data({ :enrollment => { :kindergarten => './data/Kindergartners in full-day program.csv' 
+                                            }})
+
+    assert_instance_of Array, @dr.find_all_matching('ACADEMY 20')
+    assert_equal 11, @dr.find_all_matching('ACADEMY 20').length
   end
 
 end
