@@ -10,6 +10,7 @@ class DistrictRepository
     data_set = enrollment[:kindergarten]
     contents = CSV.open(data_set, {headers: true, header_converters: :symbol})
     @districts = contents.collect do |row|
+      row[:name] = row[:location]
       District.new(row)
     end
     contents
@@ -20,7 +21,7 @@ class DistrictRepository
 
   def find_by_name(name)
     @districts.find do |district|
-      district.location == name
+      district.name == name
     end
 
   end
@@ -28,6 +29,4 @@ class DistrictRepository
   def find_all_matching
 
   end
-
-  binding.pry
 end

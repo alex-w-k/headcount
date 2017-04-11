@@ -1,10 +1,10 @@
 require 'csv'
 
 class District
-  attr_reader :location, :year, :data_format, :data
+  attr_reader :name, :year, :data_format, :data
 
   def initialize(args)
-    @location = args[:location]
+    @name = args[:name]
     @year = args[:timeframe]
     @data_format = args[:dataformat]
     @data = args[:data]

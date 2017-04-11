@@ -24,7 +24,7 @@ class DistrictRepositoryTest < Minitest::Test
                                             }})
 
     assert_instance_of District, @dr.find_by_name('ACADEMY 20')
-    assert_equal 'ACADEMY 20', @dr.find_by_name('ACADEMY 20').location
+    assert_equal 'ACADEMY 20', @dr.find_by_name('ACADEMY 20').name
   end
 
 end
