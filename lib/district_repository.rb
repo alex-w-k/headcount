@@ -6,8 +6,7 @@ class DistrictRepository
   attr_reader :districts
 
   def load_data(args)
-    enrollment = args[:enrollment]
-    data_set = enrollment[:kindergarten]
+    data_set = args[:enrollment][:kindergarten]
     contents = CSV.open(data_set, {headers: true, header_converters: :symbol})
     @districts = contents.collect do |row|
       row[:name] = row[:location]
