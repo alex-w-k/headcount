@@ -13,7 +13,6 @@ class EnrollmentRepository
       enrollment.name
     end
     collate_years
-    contents
   end
 
   def collect_enrollments(contents)
@@ -39,7 +38,7 @@ class EnrollmentRepository
     end
     @enrollments.each do |enrollment|
     @test.each do |en|
-    if enrollment.name == en.name and enrollment.kindergarten_participation != en.kindergarten_participation
+    if enrollment.name == en.name
       en.kindergarten_participation[enrollment.kindergarten_participation.keys.first] = enrollment.kindergarten_participation.values.first
       end
     end
