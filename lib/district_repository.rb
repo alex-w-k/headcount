@@ -4,12 +4,13 @@ require_relative 'district'
 require_relative 'enrollment_repository'
 
 class DistrictRepository
-  attr_reader :districts
+  attr_reader :districts, :enrollment
 
   def load_data(args)
     if args[:enrollment]
       er = EnrollmentRepository.new
       er.load_data(args)
+      @enrollment = er
     end
     data_set = args[:enrollment][:kindergarten]
     process_district_data(data_set)

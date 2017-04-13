@@ -43,6 +43,7 @@ class EnrollmentRepository
       end
     end
     end
+    @enrollments = @test
   end
     
 

@@ -36,4 +36,7 @@ class DistrictRepositoryTest < Minitest::Test
     assert_equal 7, @dr.find_all_matching('WE').length
   end
 
+  def test_it_can_call_on_enrollments_from_this_class
+  end
+
 end
