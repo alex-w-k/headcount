@@ -1,11 +1,16 @@
 require 'pry'
 require 'csv'
 require_relative 'district'
+require_relative 'enrollment_repository'
 
 class DistrictRepository
   attr_reader :districts
 
   def load_data(args)
+    if args[:enrollment]
+      er = EnrollmentRepository.new
+      er.load_data(args)
+    end
     data_set = args[:enrollment][:kindergarten]
     contents = CSV.open(data_set, {headers: true, header_converters: :symbol})
     @districts = contents.collect do |row|
