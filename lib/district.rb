@@ -1,3 +1,4 @@
+require_relative 'enrollment'
 require 'csv'
 
 class District
@@ -5,10 +6,14 @@ class District
 
   def initialize(args)
     @name = args[:name]
-    @enrollment = {}
+    @enrollment = Enrollment.new(args)
     # @year = args[:timeframe]
     # @data_format = args[:dataformat]
     # @data = args[:data]
+  end
+
+  def enrollment
+    @enrollment
   end
 
 end

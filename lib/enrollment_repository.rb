@@ -13,7 +13,6 @@ class EnrollmentRepository
       enrollment.name
     end
     collate_years
-    contents
   end
 
   def collect_enrollments(contents)

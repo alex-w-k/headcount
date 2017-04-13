@@ -12,18 +12,21 @@ class DistrictRepository
       er.load_data(args)
       @enrollment = er
     end
-
     data_set = args[:enrollment][:kindergarten]
+    process_district_data(data_set)
+  end
+
+  def process_district_data(data_set)
     contents = CSV.open(data_set, {headers: true, header_converters: :symbol})
     @districts = contents.collect do |row|
       row[:name] = row[:location]
       District.new(row)
     end
-    contents
+    @districts.uniq! {|district| district.name}
+    return contents
   end
 
-  def load_format
-  end
+
 
   def find_by_name(name)
     @districts.find do |district|
