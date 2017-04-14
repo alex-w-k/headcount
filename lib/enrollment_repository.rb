@@ -37,12 +37,13 @@ class EnrollmentRepository
       enrollment.name
     end
     @enrollments.each do |enrollment|
-    @test.each do |en|
-    if enrollment.name == en.name
-      en.kindergarten_participation[enrollment.kindergarten_participation.keys.first] = enrollment.kindergarten_participation.values.first
+      @test.each do |en|
+      if enrollment.name == en.name
+        en.kindergarten_participation[enrollment.kindergarten_participation.keys.first] = enrollment.kindergarten_participation.values.first
+        end
       end
     end
-    end
+    @enrollments = @test
   end
     
 
