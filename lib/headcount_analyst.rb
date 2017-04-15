@@ -29,8 +29,10 @@ class HeadcountAnalyst
     district_1_data = district_1.enrollment.kindergarten_participation_by_year
     district_2 = @dr.find_by_name(arg[:against])
     district_2_data = district_2.enrollment.kindergarten_participation_by_year
-    district_1_data.merge(district_2_data){|key, oldval, newval| newval / oldval}
-    
+    variation = district_1_data.merge(district_2_data) do |key, oldval, newval| 
+    	variation = oldval / newval
+    	(variation.to_f*1000).floor/1000.0
+    end
   end
 
 end

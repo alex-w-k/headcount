@@ -46,5 +46,3 @@ class DistrictRepository
   end
 end
 
-binding.pry
-""
