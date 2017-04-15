@@ -17,7 +17,7 @@ class EnrollmentRepository
 
   def collect_enrollments(contents)
     contents.collect do |row|
-      row[:name] = row[:location]
+      row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:data] = row[:data].to_f
       Enrollment.new({:name => row[:name], 
