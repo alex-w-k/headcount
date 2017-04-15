@@ -7,9 +7,6 @@ class Enrollment
   def initialize(args)
     @name = args[:name]
     @kindergarten_participation = args[:kindergarten_participation]
-    # @year = args[:timeframe]
-    # @data_format = args[:dataformat]
-    # @data = args[:data]
   end
 
   def kindergarten_participation_by_year

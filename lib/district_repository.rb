@@ -24,7 +24,6 @@ class DistrictRepository
     end
     @districts.uniq! {|district| district.name}
     add_enrollment_to_district
-    return contents
   end
 
   def add_enrollment_to_district
@@ -46,3 +45,6 @@ class DistrictRepository
     end
   end
 end
+
+binding.pry
+""

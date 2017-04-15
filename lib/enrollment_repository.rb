@@ -45,6 +45,4 @@ class EnrollmentRepository
     end
     @enrollments = @test
   end
-    
-
 end
