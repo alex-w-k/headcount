@@ -35,4 +35,37 @@ class HeadcountAnalyst
     end
   end
 
+  def average_high_school_graduation_rates_for_district(name)
+  	district = @dr.find_by_name(name)
+  	sum = district.enrollment.graduation_by_year.reduce(0) do |a, b|
+      a + b[1]
+    end
+    average = sum / district.enrollment.graduation_by_year.length
+    (average.to_f*1000).floor/1000.0
+  end
+
+  def high_school_graduation_rate_variation(name, arg)
+    district_1 = average_high_school_graduation_rates_for_district(name)
+    district_2 = average_high_school_graduation_rates_for_district(arg[:against])
+    variation = district_1 / district_2
+    (variation.to_f*1000).floor/1000.0
+  end
+
+  def kindergarten_participation_against_high_school_graduation(name)
+    variation = kindergarten_participation_rate_variation(name, :against => 'COLORADO') /
+    high_school_graduation_rate_variation(name, :against => 'COLORADO')
+    (variation.to_f*1000).floor/1000.0
+  end
+
+  def kindergarten_participation_correlates_with_high_school_graduation(arg)
+    if arg[:for] = 'STATEWIDE'
+
+    variation = kindergarten_participation_against_high_school_graduation(arg[:for])
+    if variation > 0.5 && variation < 1.5
+      true
+    else
+      false
+    end
+  end
+
 end
