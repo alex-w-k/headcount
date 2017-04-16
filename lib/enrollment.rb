@@ -7,8 +7,8 @@ require 'csv'
 # said data.
 
 class Enrollment
-  attr_reader :name, :kindergarten_participation
-  attr_accessor :high_school_graduation_rates
+  attr_reader :name
+  attr_accessor :high_school_graduation_rates, :kindergarten_participation
 
   def initialize(args)
     @name = args[:name]
@@ -39,7 +39,7 @@ class Enrollment
   end
 
   def graduation_rate_in_year(year)
-    kindergarten_participation_by_year[year]
+    graduation_by_year[year]
   end
 
   private

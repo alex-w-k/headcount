@@ -17,12 +17,14 @@ class DistrictRepository
   end
 
   def process_district_data(data_set)
+
     contents = CSV.open(data_set, {headers: true, header_converters: :symbol})
     @districts = contents.collect do |row|
       row[:name] = row[:location].upcase
       District.new(row)
     end
-    @districts.uniq! {|district| district.name}
+    districts.uniq! {|district| district.name}
+
     add_enrollment_to_district
   end
 
@@ -46,3 +48,5 @@ class DistrictRepository
   end
 end
 
+# binding.pry
+# ''

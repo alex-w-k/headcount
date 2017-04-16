@@ -11,4 +11,3 @@ class District
   end
 
 end
-

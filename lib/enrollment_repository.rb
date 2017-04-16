@@ -15,6 +15,7 @@ class EnrollmentRepository
     if !@hs_data_set.nil?
       add_high_school_data_to_enrollments
     end
+    enrollments
   end
 
   def collect_enrollments(contents)
@@ -27,7 +28,7 @@ class EnrollmentRepository
   end
 
   def uniqueize_enrollments
-    enrollments.uniq! do |enrollment|
+    @enrollments.uniq! do |enrollment|
       enrollment.name
     end
   end
@@ -39,12 +40,12 @@ class EnrollmentRepository
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:data] = row[:data].to_f
-      index = enrollments.find_index do |enrollment|
+      index = @enrollments.find_index do |enrollment|
             enrollment.name == row[:location].upcase
           end
-      enrollments[index].kindergarten_participation[row[:timeframe]] = row[:data]
+      @enrollments[index].kindergarten_participation[row[:timeframe]] = row[:data]
     end
-    enrollments
+    @enrollments
   end
 
   def add_high_school_data_to_enrollments
@@ -56,9 +57,9 @@ class EnrollmentRepository
       index = enrollments.find_index do |enrollment|
             enrollment.name == row[:location].upcase
           end
-      enrollments[index].high_school_graduation_rates[row[:timeframe]] = row[:data]
+      @enrollments[index].high_school_graduation_rates[row[:timeframe]] = row[:data]
     end
-    enrollments
+    @enrollments
   end
 
   def find_by_name(name)
@@ -70,5 +71,5 @@ class EnrollmentRepository
 
 end
 
-binding.pry
-""
+# binding.pry
+# ""

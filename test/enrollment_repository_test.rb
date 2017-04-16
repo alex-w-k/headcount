@@ -49,7 +49,7 @@ class EnrollmentRepositoryTest < Minitest::Test
     assert_equal 'ACADEMY 20', enrollment.name
     assert_equal 0.302,
                 enrollment.kindergarten_participation_in_year(2004)
-    assert_equal 0.478,
+    assert_equal 0.889,
                 enrollment.graduation_rate_in_year(2012)
 
   end
