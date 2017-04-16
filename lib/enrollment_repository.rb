@@ -14,7 +14,9 @@ class EnrollmentRepository
       enrollment.name
     end
     collate_years
-    add_high_school_data_to_enrollments
+    if !@hs_data_set.nil?
+      add_high_school_data_to_enrollments
+    end
   end
 
   def collect_enrollments(contents)

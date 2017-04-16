@@ -33,7 +33,7 @@ class EnrollmentRepositoryTest < Minitest::Test
     assert_equal name, enrollment.name
     assert enrollment.is_a?(Enrollment)
     assert_in_delta 0.144, 
-      enrollment.kindergarten_participation_in_year(2004), 0.005
+    enrollment.kindergarten_participation_in_year(2004), 0.005
   end
 
 
