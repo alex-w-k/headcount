@@ -28,7 +28,7 @@ class EnrollmentRepository
   end
 
   def uniqueize_enrollments
-    @enrollments.uniq! do |enrollment|
+    enrollments.uniq! do |enrollment|
       enrollment.name
     end
   end
@@ -43,9 +43,9 @@ class EnrollmentRepository
       index = @enrollments.find_index do |enrollment|
             enrollment.name == row[:location].upcase
           end
-      @enrollments[index].kindergarten_participation[row[:timeframe]] = row[:data]
+      enrollments[index].kindergarten_participation[row[:timeframe]] = row[:data]
     end
-    @enrollments
+    enrollments
   end
 
   def add_high_school_data_to_enrollments
@@ -57,9 +57,9 @@ class EnrollmentRepository
       index = enrollments.find_index do |enrollment|
             enrollment.name == row[:location].upcase
           end
-      @enrollments[index].high_school_graduation_rates[row[:timeframe]] = row[:data]
+      enrollments[index].high_school_graduation_rates[row[:timeframe]] = row[:data]
     end
-    @enrollments
+    enrollments
   end
 
   def find_by_name(name)
