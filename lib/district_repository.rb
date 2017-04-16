@@ -35,14 +35,14 @@ class DistrictRepository
   end
 
   def find_by_name(name)
-    @districts.find do |district|
+    districts.find do |district|
       district.name == name
     end
   end
 
   def find_all_matching(name)
     index = name.length - 1
-    @districts.find_all do |district|
+    districts.find_all do |district|
       district.name[0..index] == name[0..index]
     end
   end
