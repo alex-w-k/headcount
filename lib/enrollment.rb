@@ -1,6 +1,11 @@
 require 'pry'
 require 'csv'
 
+##
+# The Enrollment class creates all the Enrollment objects with the kindergarten
+# participation and highschool graduation data as well as functions to access
+# said data.
+
 class Enrollment
   attr_reader :name, :kindergarten_participation
   attr_accessor :high_school_graduation_rates
@@ -24,10 +29,6 @@ class Enrollment
     kindergarten_participation_by_year[year]
   end
 
-  def truncate_to_3_decimal_points(num)
-    (num.to_f*1000).floor/1000.0
-  end
-
   def graduation_by_year
     @high_school_graduation_rates.reduce({}) do |key, value|
       key.merge(value.first => truncate_to_3_decimal_points(value.last))
@@ -36,6 +37,12 @@ class Enrollment
 
   def graduation_rate_in_year(year)
     kindergarten_participation_by_year[year]
+  end
+
+  private
+
+  def truncate_to_3_decimal_points(num)
+    (num.to_f*1000).floor/1000.0
   end
 
 end

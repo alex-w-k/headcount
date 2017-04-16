@@ -5,12 +5,12 @@ require_relative '../lib/enrollment'
 class EnrollmentTest < Minitest::Test
 
   def setup
-    @e = Enrollment.new({:name => "ACADEMY 20"
+    @e = Enrollment.new({:name => "ACADEMY 20",
               					 :kindergarten_participation => 
               					 	{ 2010 => 0.391,
                						  2011 => 0.353,
                		          2012 => 0.267
-                            }
+                            },
                           :high_school_graduation =>
                           { 2010 => 0.895,
                             2011 => 0.895,
@@ -41,5 +41,8 @@ class EnrollmentTest < Minitest::Test
     assert_equal 0.391, @e.kindergarten_participation_in_year(2010)
   end
 
-  
+  def test_graduation_by_year
+  end
+
+
 end
