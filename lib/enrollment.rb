@@ -28,6 +28,16 @@ class Enrollment
     (num.to_f*1000).floor/1000.0
   end
 
+  def graduation_by_year
+    @high_school_graduation_rates.reduce({}) do |key, value|
+      key.merge(value.first => truncate_to_3_decimal_points(value.last))
+    end
+  end
+
+  def graduation_rate_in_year(year)
+    kindergarten_participation_by_year[year]
+  end
+
 end
 
 # binding.pry
