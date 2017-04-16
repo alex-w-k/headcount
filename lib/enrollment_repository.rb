@@ -27,7 +27,7 @@ class EnrollmentRepository
   end
 
   def uniqueize_enrollments
-    @enrollments.uniq! do |enrollment|
+    enrollments.uniq! do |enrollment|
       enrollment.name
     end
   end
@@ -39,12 +39,12 @@ class EnrollmentRepository
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:data] = row[:data].to_f
-      index = @enrollments.find_index do |enrollment|
+      index = enrollments.find_index do |enrollment|
             enrollment.name == row[:location].upcase
           end
-      @enrollments[index].kindergarten_participation[row[:timeframe]] = row[:data]
+      enrollments[index].kindergarten_participation[row[:timeframe]] = row[:data]
     end
-    @enrollments
+    enrollments
   end
 
   def add_high_school_data_to_enrollments
@@ -53,34 +53,21 @@ class EnrollmentRepository
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:data] = row[:data].to_f
-      index = @enrollments.find_index do |enrollment|
+      index = enrollments.find_index do |enrollment|
             enrollment.name == row[:location].upcase
           end
-      @enrollments[index].high_school_graduation_rates[row[:timeframe]] = row[:data]
+      enrollments[index].high_school_graduation_rates[row[:timeframe]] = row[:data]
     end
-    @enrollments
+    enrollments
   end
 
   def find_by_name(name)
-    @enrollments.find do |enrollment|
+    enrollments.find do |enrollment|
       enrollment.name == name
     end
   end
 
-  # def collate_years
-  #   @test = @enrollments.uniq do |enrollment|
-  #     enrollment.name
-  #   end
-  #   @enrollments.each do |enrollment|
-  #     @test.each do |en|
-  #     if enrollment.name == en.name
-  #       en.kindergarten_participation[enrollment.kindergarten_participation.keys.first] =
-  #       enrollment.kindergarten_participation.values.first
-  #       end
-  #     end
-  #   end
-  #   @enrollments = @test
-  # end
+
 end
 
 binding.pry
