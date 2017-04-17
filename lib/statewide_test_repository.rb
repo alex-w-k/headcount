@@ -39,21 +39,34 @@ class StatewideTestRepository
       row[:data] = row[:data].to_f
       index = tests.find_index do |test|
           test.name == row[:location].upcase
-        end
-      if row[:score] == 'math'
-        row[:math] = row[:score]
-        row[:math_data] = row[:data]
-      elsif row[:score] == 'reading'
-        row[:reading] == row[:score]
-        row[:reading_data] = row[:data]
-      elsif row[:score] == 'writing'
-        row[:writing] == row[:score]
-        row[:writing_data] = row[:data]
       end
-        
-      tests[index].third_grade[row[:timeframe]] = {:math => row[:math_data], :reading => row[:reading_data], :writing => row[:writing_data]}
+      if row[:score] == 'math'
+        if tests[index].third_grade[row[:timeframe]] != nil
+          tests[index].third_grade[row[:timeframe]].merge!(math: row[:data])
+        else
+          tests[index].third_grade[row[:timeframe]] = {math: row[:data]}
+        end
+      elsif row[:score] == 'reading'
+        if tests[index].third_grade[row[:timeframe]] != nil
+          tests[index].third_grade[row[:timeframe]].merge!(reading: row[:data])
+        else
+          tests[index].third_grade[row[:timeframe]] = {reading: row[:data]}
+        end
+      elsif row[:score] == 'writing'
+        if tests[index].third_grade[row[:timeframe]] != nil
+          tests[index].third_grade[row[:timeframe]].merge!(writing: row[:data])
+        else
+          tests[index].third_grade[row[:timeframe]] = {writing: row[:data]}
+        end
+      end
     end
     tests
+  end
+
+  def find_by_name(name)
+    tests.find do |test|
+      test.name == name
+    end
   end
 
 end
