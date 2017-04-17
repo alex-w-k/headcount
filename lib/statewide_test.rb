@@ -1,8 +1,11 @@
 require 'pry'
 require 'csv'
+require_relative 'custom_errors'
 
 class StatewideTest
   attr_reader :name, :third_grade, :eighth_grade, :math, :reading, :writing
+
+  #VALID_GRADE = {3 => :third_grade, 8 => :eighth_grade}
 
   def initialize(args)
     @name = args[:name]
@@ -26,6 +29,21 @@ class StatewideTest
     if @writing.nil?
       @writing = Hash.new
     end
+  end
+
+  def proficient_by_grade(grade)
+    #raise UnknownDataError unless VALID_GRADE.keys.include?(grade)
+    if grade == 3
+      @third_grade
+    elsif grade == 8
+      @eighth_grade
+    else
+      raise UnknownDataError
+    end
+      
+      
+      
+    #@tests[VALID_GRADE[grade]]
   end
 
 end
