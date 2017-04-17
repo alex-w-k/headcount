@@ -15,9 +15,9 @@ class StatewideTestRepository
     uniqueize_statewide_tests
     add_third_grade_data_to_tests
     add_eighth_grade_data_to_tests
-    add_math_data_by_race_to_tests
-    add_reading_data_by_race_to_tests
-    add_writing_data_by_race_to_tests
+    add_math_data_to_race_data
+    add_reading_data_to_race_data
+    add_writing_data_to_race_data
   end
 
   def collect_statewide_tests(contents)
@@ -45,19 +45,19 @@ class StatewideTestRepository
           test.name == row[:location].upcase
       end
       if row[:score] == 'math'
-        if tests[index].third_grade[row[:timeframe]] != nil
+        if !tests[index].third_grade[row[:timeframe]].nil?
           tests[index].third_grade[row[:timeframe]].merge!(math: row[:data])
         else
           tests[index].third_grade[row[:timeframe]] = {math: row[:data]}
         end
       elsif row[:score] == 'reading'
-        if tests[index].third_grade[row[:timeframe]] != nil
+        if !tests[index].third_grade[row[:timeframe]].nil?
           tests[index].third_grade[row[:timeframe]].merge!(reading: row[:data])
         else
           tests[index].third_grade[row[:timeframe]] = {reading: row[:data]}
         end
       elsif row[:score] == 'writing'
-        if tests[index].third_grade[row[:timeframe]] != nil
+        if !tests[index].third_grade[row[:timeframe]].nil?
           tests[index].third_grade[row[:timeframe]].merge!(writing: row[:data])
         else
           tests[index].third_grade[row[:timeframe]] = {writing: row[:data]}
@@ -78,19 +78,19 @@ class StatewideTestRepository
           test.name == row[:location].upcase
       end
       if row[:score] == 'math'
-        if tests[index].eighth_grade[row[:timeframe]] != nil
+        if !tests[index].eighth_grade[row[:timeframe]].nil?
           tests[index].eighth_grade[row[:timeframe]].merge!(math: row[:data])
         else
           tests[index].eighth_grade[row[:timeframe]] = {math: row[:data]}
         end
       elsif row[:score] == 'reading'
-        if tests[index].eighth_grade[row[:timeframe]] != nil
+        if !tests[index].eighth_grade[row[:timeframe]].nil?
           tests[index].eighth_grade[row[:timeframe]].merge!(reading: row[:data])
         else
           tests[index].eighth_grade[row[:timeframe]] = {reading: row[:data]}
         end
       elsif row[:score] == 'writing'
-        if tests[index].eighth_grade[row[:timeframe]] != nil
+        if !tests[index].eighth_grade[row[:timeframe]].nil?
           tests[index].eighth_grade[row[:timeframe]].merge!(writing: row[:data])
         else
           tests[index].eighth_grade[row[:timeframe]] = {writing: row[:data]}
@@ -100,7 +100,7 @@ class StatewideTestRepository
     tests
   end
 
-  def add_math_data_by_race_to_tests
+  def add_math_data_to_race_data
     math_contents = CSV.open(@math, {headers: true, header_converters: :symbol})
     math_contents.each do |row|
       row[:name] = row[:location].upcase
@@ -111,59 +111,59 @@ class StatewideTestRepository
           test.name == row[:location].upcase
       end
       if row[:race] == 'all students'
-        if tests[index].math[row[:timeframe]] != nil
-          tests[index].math[row[:timeframe]].merge!(all_students: row[:data])
+        if !tests[index].race_data[:all_students][row[:timeframe]].nil?
+          tests[index].race_data[:all_students][row[:timeframe]].merge!(math: row[:data])
         else
-          tests[index].math[row[:timeframe]] = {all_students: row[:data]}
+          tests[index].race_data[:all_students][row[:timeframe]] = {:math => row[:data]}
         end
       elsif row[:race] == 'asian'
-        if tests[index].math[row[:timeframe]] != nil
-          tests[index].math[row[:timeframe]].merge!(asian: row[:data])
+        if !tests[index].race_data[:asian][row[:timeframe]].nil?
+          tests[index].race_data[:asian][row[:timeframe]].merge!(math: row[:data])
         else
-          tests[index].math[row[:timeframe]] = {asian: row[:data]}
+          tests[index].race_data[:asian][row[:timeframe]] = {:math => row[:data]}
         end
       elsif row[:race] == 'black'
-        if tests[index].math[row[:timeframe]] != nil
-          tests[index].math[row[:timeframe]].merge!(black: row[:data])
+        if !tests[index].race_data[:black][row[:timeframe]].nil?
+          tests[index].race_data[:black][row[:timeframe]].merge!(math: row[:data])
         else
-          tests[index].math[row[:timeframe]] = {black: row[:data]}
+          tests[index].race_data[:black][row[:timeframe]] = {:math => row[:data]}
         end
       elsif row[:race] == 'hawaiian/pacific islander'
-        if tests[index].math[row[:timeframe]] != nil
-          tests[index].math[row[:timeframe]].merge!(pacific_islander: row[:data])
+        if !tests[index].race_data[:pacific_islander][row[:timeframe]].nil?
+          tests[index].race_data[:pacific_islander][row[:timeframe]].merge!(math: row[:data])
         else
-          tests[index].math[row[:timeframe]] = {pacific_islander: row[:data]}
+          tests[index].race_data[:pacific_islander][row[:timeframe]] = {:math => row[:data]}
         end
       elsif row[:race] == 'hispanic'
-        if tests[index].math[row[:timeframe]] != nil
-          tests[index].math[row[:timeframe]].merge!(hispanic: row[:data])
+        if !tests[index].race_data[:hispanic][row[:timeframe]].nil?
+          tests[index].race_data[:hispanic][row[:timeframe]].merge!(math: row[:data])
         else
-          tests[index].math[row[:timeframe]] = {hispanic: row[:data]}
+          tests[index].race_data[:hispanic][row[:timeframe]] = {:math => row[:data]}
         end
       elsif row[:race] == 'native american'
-        if tests[index].math[row[:timeframe]] != nil
-          tests[index].math[row[:timeframe]].merge!(native_american: row[:data])
+        if !tests[index].race_data[:native_american][row[:timeframe]].nil?
+          tests[index].race_data[:native_american][row[:timeframe]].merge!(math: row[:data])
         else
-          tests[index].math[row[:timeframe]] = {native_american: row[:data]}
+          tests[index].race_data[:native_american][row[:timeframe]] = {:math => row[:data]}
         end
       elsif row[:race] == 'two or more'
-        if tests[index].math[row[:timeframe]] != nil
-          tests[index].math[row[:timeframe]].merge!(two_or_more: row[:data])
+        if !tests[index].race_data[:two_or_more][row[:timeframe]].nil?
+          tests[index].race_data[:two_or_more][row[:timeframe]].merge!(math: row[:data])
         else
-          tests[index].math[row[:timeframe]] = {two_or_more: row[:data]}
+          tests[index].race_data[:two_or_more][row[:timeframe]] = {:math => row[:data]}
         end
       elsif row[:race] == 'white'
-        if tests[index].math[row[:timeframe]] != nil
-          tests[index].math[row[:timeframe]].merge!(white: row[:data])
+        if !tests[index].race_data[:white][row[:timeframe]].nil?
+          tests[index].race_data[:white][row[:timeframe]].merge!(math: row[:data])
         else
-          tests[index].math[row[:timeframe]] = {white: row[:data]}
+          tests[index].race_data[:white][row[:timeframe]] = {:math => row[:data]}
         end
       end
     end
     tests
   end
 
-  def add_reading_data_by_race_to_tests
+  def add_reading_data_to_race_data
     reading_contents = CSV.open(@reading, {headers: true, header_converters: :symbol})
     reading_contents.each do |row|
       row[:name] = row[:location].upcase
@@ -174,59 +174,59 @@ class StatewideTestRepository
           test.name == row[:location].upcase
       end
       if row[:race] == 'all students'
-        if tests[index].reading[row[:timeframe]] != nil
-          tests[index].reading[row[:timeframe]].merge!(all_students: row[:data])
+        if !tests[index].race_data[:all_students][row[:timeframe]].nil?
+          tests[index].race_data[:all_students][row[:timeframe]].merge!(reading: row[:data])
         else
-          tests[index].reading[row[:timeframe]] = {all_students: row[:data]}
+          tests[index].race_data[:all_students][row[:timeframe]] = {:reading => row[:data]}
         end
       elsif row[:race] == 'asian'
-        if tests[index].reading[row[:timeframe]] != nil
-          tests[index].reading[row[:timeframe]].merge!(asian: row[:data])
+        if !tests[index].race_data[:asian][row[:timeframe]].nil?
+          tests[index].race_data[:asian][row[:timeframe]].merge!(reading: row[:data])
         else
-          tests[index].reading[row[:timeframe]] = {asian: row[:data]}
+          tests[index].race_data[:asian][row[:timeframe]] = {:reading => row[:data]}
         end
       elsif row[:race] == 'black'
-        if tests[index].reading[row[:timeframe]] != nil
-          tests[index].reading[row[:timeframe]].merge!(black: row[:data])
+        if !tests[index].race_data[:black][row[:timeframe]].nil?
+          tests[index].race_data[:black][row[:timeframe]].merge!(reading: row[:data])
         else
-          tests[index].reading[row[:timeframe]] = {black: row[:data]}
+          tests[index].race_data[:black][row[:timeframe]] = {:reading => row[:data]}
         end
       elsif row[:race] == 'hawaiian/pacific islander'
-        if tests[index].reading[row[:timeframe]] != nil
-          tests[index].reading[row[:timeframe]].merge!(pacific_islander: row[:data])
+        if !tests[index].race_data[:pacific_islander][row[:timeframe]].nil?
+          tests[index].race_data[:pacific_islander][row[:timeframe]].merge!(reading: row[:data])
         else
-          tests[index].reading[row[:timeframe]] = {pacific_islander: row[:data]}
+          tests[index].race_data[:pacific_islander][row[:timeframe]] = {:reading => row[:data]}
         end
       elsif row[:race] == 'hispanic'
-        if tests[index].reading[row[:timeframe]] != nil
-          tests[index].reading[row[:timeframe]].merge!(hispanic: row[:data])
+        if !tests[index].race_data[:hispanic][row[:timeframe]].nil?
+          tests[index].race_data[:hispanic][row[:timeframe]].merge!(reading: row[:data])
         else
-          tests[index].reading[row[:timeframe]] = {hispanic: row[:data]}
+          tests[index].race_data[:hispanic][row[:timeframe]] = {:reading => row[:data]}
         end
       elsif row[:race] == 'native american'
-        if tests[index].reading[row[:timeframe]] != nil
-          tests[index].reading[row[:timeframe]].merge!(native_american: row[:data])
+        if !tests[index].race_data[:native_american][row[:timeframe]].nil?
+          tests[index].race_data[:native_american][row[:timeframe]].merge!(reading: row[:data])
         else
-          tests[index].reading[row[:timeframe]] = {native_american: row[:data]}
+          tests[index].race_data[:native_american][row[:timeframe]] = {:reading => row[:data]}
         end
       elsif row[:race] == 'two or more'
-        if tests[index].reading[row[:timeframe]] != nil
-          tests[index].reading[row[:timeframe]].merge!(two_or_more: row[:data])
+        if !tests[index].race_data[:two_or_more][row[:timeframe]].nil?
+          tests[index].race_data[:two_or_more][row[:timeframe]].merge!(reading: row[:data])
         else
-          tests[index].reading[row[:timeframe]] = {two_or_more: row[:data]}
+          tests[index].race_data[:two_or_more][row[:timeframe]] = {:reading => row[:data]}
         end
       elsif row[:race] == 'white'
-        if tests[index].reading[row[:timeframe]] != nil
-          tests[index].reading[row[:timeframe]].merge!(white: row[:data])
+        if !tests[index].race_data[:white][row[:timeframe]].nil?
+          tests[index].race_data[:white][row[:timeframe]].merge!(reading: row[:data])
         else
-          tests[index].reading[row[:timeframe]] = {white: row[:data]}
+          tests[index].race_data[:white][row[:timeframe]] = {:reading => row[:data]}
         end
       end
     end
     tests
   end
 
-  def add_writing_data_by_race_to_tests
+  def add_writing_data_to_race_data
     writing_contents = CSV.open(@writing, {headers: true, header_converters: :symbol})
     writing_contents.each do |row|
       row[:name] = row[:location].upcase
@@ -237,52 +237,52 @@ class StatewideTestRepository
           test.name == row[:location].upcase
       end
       if row[:race] == 'all students'
-        if tests[index].writing[row[:timeframe]] != nil
-          tests[index].writing[row[:timeframe]].merge!(all_students: row[:data])
+        if !tests[index].race_data[:all_students][row[:timeframe]].nil?
+          tests[index].race_data[:all_students][row[:timeframe]].merge!(writing: row[:data])
         else
-          tests[index].writing[row[:timeframe]] = {all_students: row[:data]}
+          tests[index].race_data[:all_students][row[:timeframe]] = {:writing => row[:data]}
         end
       elsif row[:race] == 'asian'
-        if tests[index].writing[row[:timeframe]] != nil
-          tests[index].writing[row[:timeframe]].merge!(asian: row[:data])
+        if !tests[index].race_data[:asian][row[:timeframe]].nil?
+          tests[index].race_data[:asian][row[:timeframe]].merge!(writing: row[:data])
         else
-          tests[index].writing[row[:timeframe]] = {asian: row[:data]}
+          tests[index].race_data[:asian][row[:timeframe]] = {:writing => row[:data]}
         end
       elsif row[:race] == 'black'
-        if tests[index].writing[row[:timeframe]] != nil
-          tests[index].writing[row[:timeframe]].merge!(black: row[:data])
+        if !tests[index].race_data[:black][row[:timeframe]].nil?
+          tests[index].race_data[:black][row[:timeframe]].merge!(writing: row[:data])
         else
-          tests[index].writing[row[:timeframe]] = {black: row[:data]}
+          tests[index].race_data[:black][row[:timeframe]] = {:writing => row[:data]}
         end
       elsif row[:race] == 'hawaiian/pacific islander'
-        if tests[index].writing[row[:timeframe]] != nil
-          tests[index].writing[row[:timeframe]].merge!(pacific_islander: row[:data])
+        if !tests[index].race_data[:pacific_islander][row[:timeframe]].nil?
+          tests[index].race_data[:pacific_islander][row[:timeframe]].merge!(writing: row[:data])
         else
-          tests[index].writing[row[:timeframe]] = {pacific_islander: row[:data]}
+          tests[index].race_data[:pacific_islander][row[:timeframe]] = {:writing => row[:data]}
         end
       elsif row[:race] == 'hispanic'
-        if tests[index].writing[row[:timeframe]] != nil
-          tests[index].writing[row[:timeframe]].merge!(hispanic: row[:data])
+        if !tests[index].race_data[:hispanic][row[:timeframe]].nil?
+          tests[index].race_data[:hispanic][row[:timeframe]].merge!(writing: row[:data])
         else
-          tests[index].writing[row[:timeframe]] = {hispanic: row[:data]}
+          tests[index].race_data[:hispanic][row[:timeframe]] = {:writing => row[:data]}
         end
       elsif row[:race] == 'native american'
-        if tests[index].writing[row[:timeframe]] != nil
-          tests[index].writing[row[:timeframe]].merge!(native_american: row[:data])
+        if !tests[index].race_data[:native_american][row[:timeframe]].nil?
+          tests[index].race_data[:native_american][row[:timeframe]].merge!(writing: row[:data])
         else
-          tests[index].writing[row[:timeframe]] = {native_american: row[:data]}
+          tests[index].race_data[:native_american][row[:timeframe]] = {:writing => row[:data]}
         end
       elsif row[:race] == 'two or more'
-        if tests[index].writing[row[:timeframe]] != nil
-          tests[index].writing[row[:timeframe]].merge!(two_or_more: row[:data])
+        if !tests[index].race_data[:two_or_more][row[:timeframe]].nil?
+          tests[index].race_data[:two_or_more][row[:timeframe]].merge!(writing: row[:data])
         else
-          tests[index].writing[row[:timeframe]] = {two_or_more: row[:data]}
+          tests[index].race_data[:two_or_more][row[:timeframe]] = {:writing => row[:data]}
         end
       elsif row[:race] == 'white'
-        if tests[index].writing[row[:timeframe]] != nil
-          tests[index].writing[row[:timeframe]].merge!(white: row[:data])
+        if !tests[index].race_data[:white][row[:timeframe]].nil?
+          tests[index].race_data[:white][row[:timeframe]].merge!(writing: row[:data])
         else
-          tests[index].writing[row[:timeframe]] = {white: row[:data]}
+          tests[index].race_data[:white][row[:timeframe]] = {:writing => row[:data]}
         end
       end
     end
@@ -297,5 +297,5 @@ class StatewideTestRepository
 
 end
 
-# binding.pry
-# ""
+binding.pry
+""

@@ -3,7 +3,7 @@ require 'csv'
 require_relative 'custom_errors'
 
 class StatewideTest
-  attr_reader :name, :third_grade, :eighth_grade, :math, :reading, :writing
+  attr_reader :name, :third_grade, :eighth_grade, :race_data
 
   #VALID_GRADE = {3 => :third_grade, 8 => :eighth_grade}
 
@@ -17,17 +17,17 @@ class StatewideTest
     if @eighth_grade.nil?
       @eighth_grade = Hash.new
     end
-    @math = args[:math]
-    if @math.nil?
-      @math = Hash.new
-    end
-    @reading = args[:reading]
-    if @reading.nil?
-      @reading = Hash.new
-    end
-    @writing = args[:writing]
-    if @writing.nil?
-      @writing = Hash.new
+    @race_data = args[:race_data]
+    if @race_data.nil?
+      @race_data = {:all_students=>{},
+                    :asian=>{},
+                    :black=>{},
+                    :pacific_islander=>{},
+                    :hispanic=>{},
+                    :native_american=>{},
+                    :two_or_more=>{},
+                    :white=>{}
+                  }
     end
   end
 
