@@ -14,6 +14,7 @@ class StatewideTestRepository
     @tests = collect_statewide_tests(@third_grade_data)
     uniqueize_statewide_tests
     add_third_grade_data_to_tests
+    add_eighth_grade_data_to_tests
   end
 
   def collect_statewide_tests(contents)
@@ -63,6 +64,39 @@ class StatewideTestRepository
     tests
   end
 
+    def add_eighth_grade_data_to_tests
+    eighth_grade_contents = CSV.open(@eighth_grade_data, {headers: true, header_converters: :symbol})
+    eighth_grade_contents.each do |row|
+      row[:name] = row[:location].upcase
+      row[:timeframe] = row[:timeframe].to_i
+      row[:score] = row[:score].downcase
+      row[:data] = row[:data].to_f
+      index = tests.find_index do |test|
+          test.name == row[:location].upcase
+      end
+      if row[:score] == 'math'
+        if tests[index].eighth_grade[row[:timeframe]] != nil
+          tests[index].eighth_grade[row[:timeframe]].merge!(math: row[:data])
+        else
+          tests[index].eighth_grade[row[:timeframe]] = {math: row[:data]}
+        end
+      elsif row[:score] == 'reading'
+        if tests[index].eighth_grade[row[:timeframe]] != nil
+          tests[index].eighth_grade[row[:timeframe]].merge!(reading: row[:data])
+        else
+          tests[index].eighth_grade[row[:timeframe]] = {reading: row[:data]}
+        end
+      elsif row[:score] == 'writing'
+        if tests[index].eighth_grade[row[:timeframe]] != nil
+          tests[index].eighth_grade[row[:timeframe]].merge!(writing: row[:data])
+        else
+          tests[index].eighth_grade[row[:timeframe]] = {writing: row[:data]}
+        end
+      end
+    end
+    tests
+  end
+
   def find_by_name(name)
     tests.find do |test|
       test.name == name
@@ -70,3 +104,6 @@ class StatewideTestRepository
   end
 
 end
+
+binding.pry
+""
