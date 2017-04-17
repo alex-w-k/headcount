@@ -32,7 +32,6 @@ class StatewideTest
   end
 
   def proficient_by_grade(grade)
-    #raise UnknownDataError unless VALID_GRADE.keys.include?(grade)
     if grade == 3
       @third_grade
     elsif grade == 8
@@ -40,10 +39,5 @@ class StatewideTest
     else
       raise UnknownDataError
     end
-      
-      
-      
-    #@tests[VALID_GRADE[grade]]
   end
-
 end
