@@ -24,7 +24,6 @@ class DistrictRepository
       District.new(row)
     end
     districts.uniq! {|district| district.name}
-
     add_enrollment_to_district
   end
 
