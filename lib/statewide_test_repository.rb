@@ -40,7 +40,11 @@ class StatewideTestRepository
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:score] = row[:score].downcase
-      row[:data] = ((row[:data].to_f)*1000).floor/1000.0
+      if row[:data] == 'N/A' || row[:data] == 'LNE'
+        row[:data] = 'N/A'
+      else
+        row[:data] = ((row[:data].to_f)*1000).floor/1000.0
+      end
       index = tests.find_index do |test|
           test.name == row[:location].upcase
       end
@@ -73,7 +77,11 @@ class StatewideTestRepository
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:score] = row[:score].downcase
-      row[:data] = ((row[:data].to_f)*1000).floor/1000.0
+      if row[:data] == 'N/A' || row[:data] == 'LNE'
+        row[:data] = 'N/A'
+      else
+        row[:data] = ((row[:data].to_f)*1000).floor/1000.0
+      end
       index = tests.find_index do |test|
           test.name == row[:location].upcase
       end
@@ -106,7 +114,11 @@ class StatewideTestRepository
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:race] = row[:race_ethnicity].downcase
-      row[:data] = ((row[:data].to_f)*1000).floor/1000.0
+      if row[:data] == 'N/A' || row[:data] == 'LNE'
+        row[:data] = 'N/A'
+      else
+        row[:data] = ((row[:data].to_f)*1000).floor/1000.0
+      end
       index = tests.find_index do |test|
           test.name == row[:location].upcase
       end
@@ -169,7 +181,11 @@ class StatewideTestRepository
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:race] = row[:race_ethnicity].downcase
-      row[:data] = ((row[:data].to_f)*1000).floor/1000.0
+      if row[:data] == 'N/A' || row[:data] == 'LNE'
+        row[:data] = 'N/A'
+      else
+        row[:data] = ((row[:data].to_f)*1000).floor/1000.0
+      end
       index = tests.find_index do |test|
           test.name == row[:location].upcase
       end
@@ -232,7 +248,11 @@ class StatewideTestRepository
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:race] = row[:race_ethnicity].downcase
-      row[:data] = ((row[:data].to_f)*1000).floor/1000.0
+      if row[:data] == 'N/A' || row[:data] == 'LNE'
+        row[:data] = 'N/A'
+      else
+        row[:data] = ((row[:data].to_f)*1000).floor/1000.0
+      end
       index = tests.find_index do |test|
           test.name == row[:location].upcase
       end
@@ -297,5 +317,5 @@ class StatewideTestRepository
 
 end
 
-binding.pry
-""
+# binding.pry
+# ""
