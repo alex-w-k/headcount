@@ -63,6 +63,12 @@ class HeadcountAnalystTest < Minitest::Test
     refute result
   end
 
+  def test_kindergarten_participation_correlates_with_high_school_graduation_for_subset_of_districts
+    districts = ['ACADEMY 20', 'PARK (ESTES PARK) R-3', 'YUMA SCHOOL DISTRICT 1']
+    result = @ha.kindergarten_participation_correlates_with_high_school_graduation(across: districts)
+    assert result
+  end
+
   # def test_high_school_graduation_rate_variation_trend
   #   trend = @ha.high_school_graduation_rate_variation_trend('ACADEMY 20', :against => 'COLORADO')
   #   assert_equal 0.717, trend[2008]

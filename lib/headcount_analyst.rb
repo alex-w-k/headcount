@@ -59,7 +59,37 @@ class HeadcountAnalyst
 
   def kindergarten_participation_correlates_with_high_school_graduation(arg)
     if arg[:for] == 'STATEWIDE'
+      statewide_correlation
+    elsif arg[:for]
+      district_correlation(arg[:for])
+    elsif arg[:across]
       counter = 0
+      arg[:across].each do |district|
+        variation = kindergarten_participation_against_high_school_graduation(district)
+        if variation > 0.6 && variation < 1.5
+          counter += 1
+        end
+      end
+      percent = counter / arg[:across].length
+      if percent >= 0.7
+        true
+      else
+        false
+      end
+    end
+  end
+
+  def district_correlation(state)
+    variation = kindergarten_participation_against_high_school_graduation(state)
+    if variation > 0.6 && variation < 1.5
+      true
+    else
+      false
+    end
+  end
+
+  def statewide_correlation
+    counter = 0
       @dr.districts.each do |district|
         if district.name == 'COLORADO' 
           next
@@ -69,21 +99,12 @@ class HeadcountAnalyst
           counter += 1
         end
       end
-      
       percent = counter / (@dr.districts.length - 1)
       if percent >= 0.7
         true
       else
         false
       end
-    else
-      variation = kindergarten_participation_against_high_school_graduation(arg[:for])
-      if variation > 0.6 && variation < 1.5
-        true
-      else
-        false
-      end
     end
-  end
 
 end
