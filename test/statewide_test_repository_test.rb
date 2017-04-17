@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/statewide_test_repository'
 
-class HeadcountAnalystTest < Minitest::Test
+class StatewideTestRepositoryTest < Minitest::Test
 
 	def setup
     @str = StatewideTestRepository.new
@@ -24,6 +24,11 @@ class HeadcountAnalystTest < Minitest::Test
 
   def test_can_load_data
     assert_instance_of Array, @str.load_data(@data)
+  end
+
+  def test_it_can_find_by_name
+    assert_instance_of StatewideTest, @str.find_by_name('ACADEMY 20')
+    assert_equal 'ACADEMY 20', @str.find_by_name('ACADEMY 20').name
   end
 
 

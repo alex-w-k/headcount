@@ -70,6 +70,3 @@ class StatewideTestRepository
   end
 
 end
-
-binding.pry
-''
