@@ -32,14 +32,14 @@ class Enrollment
     kindergarten_participation_by_year[year]
   end
 
-  def graduation_by_year
+  def graduation_rate_by_year
     @high_school_graduation_rates.reduce({}) do |key, value|
       key.merge(value.first => truncate_to_3_decimal_points(value.last))
     end
   end
 
   def graduation_rate_in_year(year)
-    graduation_by_year[year]
+    graduation_rate_by_year[year]
   end
 
   private

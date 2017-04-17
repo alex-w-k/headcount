@@ -53,9 +53,14 @@ class HeadcountAnalystTest < Minitest::Test
     assert_equal 0.641, var
   end
 
-  def test_kindergarten_participation_correlates_with_high_school_graduation
+  def test_kindergarten_participation_correlates_with_high_school_graduation_by_district
     result = @ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'ACADEMY 20')
     assert result
+  end
+
+  def test_kindergarten_participation_correlates_with_high_school_graduation_statewide
+    result = @ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'STATEWIDE')
+    refute result
   end
 
   # def test_high_school_graduation_rate_variation_trend

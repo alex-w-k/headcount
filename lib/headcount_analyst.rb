@@ -37,10 +37,10 @@ class HeadcountAnalyst
 
   def average_high_school_graduation_rates_for_district(name)
   	district = @dr.find_by_name(name)
-  	sum = district.enrollment.graduation_by_year.reduce(0) do |a, b|
+  	sum = district.enrollment.graduation_rate_by_year.reduce(0) do |a, b|
       a + b[1]
     end
-    average = sum / district.enrollment.graduation_by_year.length
+    average = sum / district.enrollment.graduation_rate_by_year.length
     (average.to_f*1000).floor/1000.0
   end
 
@@ -54,17 +54,35 @@ class HeadcountAnalyst
   def kindergarten_participation_against_high_school_graduation(name)
     variation = kindergarten_participation_rate_variation(name, :against => 'COLORADO') /
     high_school_graduation_rate_variation(name, :against => 'COLORADO')
-    (variation.to_f*1000).floor/1000.0
+    variation.round(3)
   end
 
   def kindergarten_participation_correlates_with_high_school_graduation(arg)
-    if arg[:for] = 'STATEWIDE'
-
-    variation = kindergarten_participation_against_high_school_graduation(arg[:for])
-    if variation > 0.5 && variation < 1.5
-      true
+    if arg[:for] == 'STATEWIDE'
+      counter = 0
+      @dr.districts.each do |district|
+        if district.name == 'COLORADO' 
+          next
+        end
+        variation = kindergarten_participation_against_high_school_graduation(district.name)
+        if variation > 0.6 && variation < 1.5
+          counter += 1
+        end
+      end
+      
+      percent = counter / (@dr.districts.length - 1)
+      if percent >= 0.7
+        true
+      else
+        false
+      end
     else
-      false
+      variation = kindergarten_participation_against_high_school_graduation(arg[:for])
+      if variation > 0.6 && variation < 1.5
+        true
+      else
+        false
+      end
     end
   end
 
