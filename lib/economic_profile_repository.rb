@@ -6,8 +6,12 @@ class EconomicProfileRepository
   attr_reader :profiles
 
   def load_data(args)
+    @median_household_income_data = args[:economic_profile][:median_household_income]
+    @children_in_poverty_data = args[:economic_profile][:children_in_poverty]
+    @free_or_reduced_price_lunch_data = args[:economic_profile][:free_or_reduced_price_lunch]
+    @title_i_data = args[:economic_profile][:title_i]
     @profiles = collect_statewide_tests(@title_i_data)
-    uniqueize_statewide_tests
+    uniqueize_economic_profiles
   end
 
   def collect_economic_profiles(contents)
