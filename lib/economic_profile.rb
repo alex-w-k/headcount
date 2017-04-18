@@ -25,5 +25,9 @@ class EconomicProfile
     end
   end
 
+  def median_household_income_in_year(year)
+    @median_household_income[year]
+  end
+
 
 end
