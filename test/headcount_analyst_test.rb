@@ -81,7 +81,9 @@ class HeadcountAnalystTest < Minitest::Test
 
   def test_top_statewide_test_year_over_year_growth
     result = @ha.top_statewide_test_year_over_year_growth(grade: 3, subject: :math)
-    assert_eqaul 'top district', result
+    assert_equal ["WILEY RE-13 JT", 0.3], result
+    result_1 = @ha.top_statewide_test_year_over_year_growth(grade: 3, subject: :reading)
+    assert_equal ["CENTENNIAL R-1", 0.114], result_1
   end
 
   # def test_high_school_graduation_rate_variation_trend

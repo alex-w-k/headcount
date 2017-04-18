@@ -111,17 +111,38 @@ class HeadcountAnalyst
       districts_growth = []
       if args[:grade] == 3
         @dr.districts.each do |district|
-          binding.pry
-          if district.statewide_test.third_grade[1][args[:subject]] == 'N/A'
-            next
+          value = false
+          year_data = district.statewide_test.third_grade.to_a
+          until value
+            if year_data.length == 0
+              value = true
+            elsif year_data[0][1][args[:subject]] == "N/A"
+              year_data.slice!(0)
+            else
+              value = true
+            end
           end
-          growth = (district.statewide_test.third_grade.max[1][args[:subject]] - 
-          district.statewide_test.third_grade.min[1][args[:subject]]) /
-          (district.statewide_test.third_grade.max[0] - district.statewide_test.third_grade.min[0])
-          districts_growth << [district.name, growth]
+          value = false
+          until value
+            if year_data.length == 0
+              value = true
+            elsif year_data[-1][1][args[:subject]] == "N/A"
+              year_data.slice!(-1)
+            else
+              value = true
+            end
+          end
+          year_data = year_data.to_h
+          if !year_data.empty? && year_data.length != 1
+            growth = (year_data.max[1][args[:subject]] - year_data.min[1][args[:subject]]) /
+                      (year_data.max[0] - year_data.min[0])
+            districts_growth << [district.name, growth]
+          end
         end
-        districts_growth
-        binding.pry
+        top = districts_growth.max_by do |district|
+          district[1]
+        end
+        top_district = [top[0], (top[1]*1000).floor/1000.0]
       elsif args[:grade] == 8
         @dr.districts.collect do |district|
           growth = (district.statewide_test.eighth_grade.max[1][args[:subject]] - 
