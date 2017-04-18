@@ -107,4 +107,35 @@ class HeadcountAnalyst
       end
     end
 
+    def top_statewide_test_year_over_year_growth(args)
+      districts_growth = []
+      if args[:grade] == 3
+        @dr.districts.each do |district|
+          binding.pry
+          if district.statewide_test.third_grade[1][args[:subject]] == 'N/A'
+            next
+          end
+          growth = (district.statewide_test.third_grade.max[1][args[:subject]] - 
+          district.statewide_test.third_grade.min[1][args[:subject]]) /
+          (district.statewide_test.third_grade.max[0] - district.statewide_test.third_grade.min[0])
+          districts_growth << [district.name, growth]
+        end
+        districts_growth
+        binding.pry
+      elsif args[:grade] == 8
+        @dr.districts.collect do |district|
+          growth = (district.statewide_test.eighth_grade.max[1][args[:subject]] - 
+            district.statewide_test.eighth_grade.min[1][args[:subject]]) /
+          (district.statewide_test.eighth_grade.max[0] - district.statewide_test.eighth_grade.min[0])
+          [district.name, growth]
+        end
+      elsif args[:grade].nil?
+        raise InsufficientInformationError
+      else
+        raise UnknownDataErrror
+      end
+
+    end
+
+
 end

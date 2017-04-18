@@ -40,7 +40,7 @@ class StatewideTestRepository
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:score] = row[:score].downcase
-      if row[:data] == 'N/A' || row[:data] == 'LNE'
+      if row[:data] == 'N/A' || row[:data] == 'LNE' || row[:data] == "#VALUE!"
         row[:data] = 'N/A'
       else
         row[:data] = ((row[:data].to_f)*1000).floor/1000.0
@@ -77,7 +77,7 @@ class StatewideTestRepository
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:score] = row[:score].downcase
-      if row[:data] == 'N/A' || row[:data] == 'LNE'
+      if row[:data] == 'N/A' || row[:data] == 'LNE' || row[:data] == "#VALUE!"
         row[:data] = 'N/A'
       else
         row[:data] = ((row[:data].to_f)*1000).floor/1000.0
@@ -114,7 +114,7 @@ class StatewideTestRepository
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:race] = row[:race_ethnicity].downcase
-      if row[:data] == 'N/A' || row[:data] == 'LNE'
+      if row[:data] == 'N/A' || row[:data] == 'LNE' || row[:data] == "#VALUE!"
         row[:data] = 'N/A'
       else
         row[:data] = ((row[:data].to_f)*1000).floor/1000.0
@@ -181,7 +181,7 @@ class StatewideTestRepository
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:race] = row[:race_ethnicity].downcase
-      if row[:data] == 'N/A' || row[:data] == 'LNE'
+      if row[:data] == 'N/A' || row[:data] == 'LNE' || row[:data] == "#VALUE!"
         row[:data] = 'N/A'
       else
         row[:data] = ((row[:data].to_f)*1000).floor/1000.0
@@ -248,7 +248,7 @@ class StatewideTestRepository
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
       row[:race] = row[:race_ethnicity].downcase
-      if row[:data] == 'N/A' || row[:data] == 'LNE'
+      if row[:data] == 'N/A' || row[:data] == 'LNE' || row[:data] == "#VALUE!"
         row[:data] = 'N/A'
       else
         row[:data] = ((row[:data].to_f)*1000).floor/1000.0

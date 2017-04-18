@@ -6,7 +6,7 @@ require_relative 'statewide_test_repository'
 require_relative 'economic_profile_repository'
 
 class DistrictRepository
-  attr_reader :districts, :enrollments
+  attr_reader :districts
 
   def load_data(args)
     data_set = args[:enrollment][:kindergarten]
