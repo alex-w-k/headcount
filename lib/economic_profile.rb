@@ -21,7 +21,7 @@ class EconomicProfile
       @free_or_reduced_price_lunch = Hash.new
     end
     @title_i = args[:title_i]
-    if @race_data.nil?
+    if @title_i.nil?
       @title_i = Hash.new
     end
   end
