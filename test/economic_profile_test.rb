@@ -33,7 +33,42 @@ class EconomicProfileTest < Minitest::Test
     assert_instance_of EconomicProfile, @profile
     assert_equal 87635, @profile.median_household_income_in_year(2009)
     assert_equal 85060, @profile.median_household_income_in_year(2005)
-    
+    assert_raises UnknownDataError do
+      @profile.median_household_income_in_year(2000)
+    end
   end
+
+  def test_median_household_income_average_method
+    assert_equal 87635, @profile.median_household_income_average
+  end
+
+  def test_children_in_poverty_in_year_method
+    assert_equal 0.064, @profile.children_in_poverty_in_year(2012)
+    assert_raises UnknownDataError do 
+      @profile.children_in_poverty_in_year(1993)
+    end
+  end
+
+  def test_free_or_reduced_price_lunch_percentage_in_year
+    assert_equal 0.103, @profile.free_or_reduced_price_lunch_percentage_in_year(2009)
+    assert_raises UnknownDataError do 
+      @profile.free_or_reduced_price_lunch_percentage_in_year(1993)
+    end
+  end
+
+  def test_free_or_reduced_price_lunch_number_in_year
+    assert_equal 2058, @profile.free_or_reduced_price_lunch_number_in_year(2008)
+    assert_raises UnknownDataError do 
+      @profile.free_or_reduced_price_lunch_number_in_year(1993)
+    end
+  end
+
+  def test_title_i_in_year
+    assert_equal 0.01, @profile.title_i_in_year(2012)
+    assert_raises UnknownDataError do 
+      @profile.title_i_in_year(1993)
+    end
+  end
+
 
 end

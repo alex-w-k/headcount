@@ -78,19 +78,21 @@ class EconomicProfileRepository
       index = profiles.find_index do |profile|
             profile.name == row[:location].upcase
       end
-      if row[:dataformat] == 'Percent'
-        row[:data] = row[:data].to_f
-        if !profiles[index].free_or_reduced_price_lunch[row[:timeframe]].nil?
-          profiles[index].free_or_reduced_price_lunch[row[:timeframe]].merge!(percentage: row[:data])
-        else
-          profiles[index].free_or_reduced_price_lunch[row[:timeframe]] = {percentage: row[:data]}
-        end
-      elsif row[:dataformat] == 'Number'
-        row[:data] = row[:data].to_i
-        if !profiles[index].free_or_reduced_price_lunch[row[:timeframe]].nil?
-          profiles[index].free_or_reduced_price_lunch[row[:timeframe]].merge!(total: row[:data])
-        else
-          profiles[index].free_or_reduced_price_lunch[row[:timeframe]] = {total: row[:data]}
+      if row[:poverty_level] == 'Eligible for Free or Reduced Lunch'
+        if row[:dataformat] == 'Percent'
+          row[:data] = ((row[:data].to_f)*1000).floor/1000.0
+          if !profiles[index].free_or_reduced_price_lunch[row[:timeframe]].nil?
+            profiles[index].free_or_reduced_price_lunch[row[:timeframe]].merge!(percentage: row[:data])
+          else
+            profiles[index].free_or_reduced_price_lunch[row[:timeframe]] = {percentage: row[:data]}
+          end
+        elsif row[:dataformat] == 'Number'
+          row[:data] = row[:data].to_i
+          if !profiles[index].free_or_reduced_price_lunch[row[:timeframe]].nil?
+            profiles[index].free_or_reduced_price_lunch[row[:timeframe]].merge!(total: row[:data])
+          else
+            profiles[index].free_or_reduced_price_lunch[row[:timeframe]] = {total: row[:data]}
+          end
         end
       end
     end
@@ -103,7 +105,7 @@ class EconomicProfileRepository
     title_i_contents.each do |row|
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
-      row[:data] = row[:data].to_f
+      row[:data] = ((row[:data].to_f)*1000).floor/1000.0
       index = profiles.find_index do |profile|
             profile.name == row[:location].upcase
           end
@@ -120,5 +122,5 @@ class EconomicProfileRepository
 
 end
 
-binding.pry
-''
+# binding.pry
+# ''

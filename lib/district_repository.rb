@@ -3,6 +3,7 @@ require 'csv'
 require_relative 'district'
 require_relative 'enrollment_repository'
 require_relative 'statewide_test_repository'
+require_relative 'economic_profile_repository'
 
 class DistrictRepository
   attr_reader :districts, :enrollments
@@ -10,7 +11,7 @@ class DistrictRepository
   def load_data(args)
     data_set = args[:enrollment][:kindergarten]
     process_district_data(data_set)
-        if args[:enrollment]
+    if args[:enrollment]
       er = EnrollmentRepository.new
       @enrollments = er.load_data(args)
       add_enrollment_to_district
@@ -19,6 +20,11 @@ class DistrictRepository
       str = StatewideTestRepository.new
       @statewide_tests = str.load_data(args)
       add_statewide_tests_to_district
+    end
+    if args[:economic_profile]
+      epr = EconomicProfileRepository.new
+      @economic_profiles = epr.load_data(args)
+      add_economic_profiles_to_district
     end
   end
 
@@ -41,6 +47,12 @@ class DistrictRepository
   def add_statewide_tests_to_district
     @districts.each_with_index do |district, index|
       district.statewide_test = @statewide_tests[index]
+    end
+  end
+
+  def add_economic_profiles_to_district
+    @districts.each_with_index do |district, index|
+      district.economic_profile = @economic_profiles[index]
     end
   end
 
