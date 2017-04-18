@@ -14,7 +14,7 @@ class EconomicProfileRepositoryTest < Minitest::Test
 		    :title_i => "./data/Title I students.csv"
 		}
   		})
-  	@profile = @epr.find_by_name('ACADEMY 20'0
+  	@profile = @epr.find_by_name('ACADEMY 20')
   end
 
   def test_it_initializes
@@ -24,7 +24,7 @@ class EconomicProfileRepositoryTest < Minitest::Test
   def test_it_can_load_data_and_find_by_name
   	assert_instance_of Array, @loaded
   	assert_instance_of EconomicProfile, @profile
-  	assert_equal 'ACADEMY 20', @profile.find_by_name
+  	assert_equal 'ACADEMY 20', @profile.name
   end
 
 
