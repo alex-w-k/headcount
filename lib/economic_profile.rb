@@ -26,7 +26,9 @@ class EconomicProfile
   end
 
   def median_household_income_in_year(year)
-    @median_household_income[year]
+    # TODO need to be able to see if year is in range of the two in the array, 
+    # then pull the income
+    @median_household_income[]
   end
 
 
