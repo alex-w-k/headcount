@@ -112,6 +112,12 @@ class EconomicProfileRepository
     profiles
   end
 
+  def find_by_name(name)
+    profiles.find do |profile|
+      profile.name == name
+    end
+  end
+
 end
 
 binding.pry
