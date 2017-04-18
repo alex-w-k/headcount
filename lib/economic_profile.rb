@@ -30,15 +30,14 @@ class EconomicProfile
     # then pull all incomes it works for then average all of them
 
 
-    incomes = @median_household_income.map do |key, value|
+    incomes = @median_household_income.keep_if do |key, value|
       first = key[0]
       second = key[1]
-      if (first..second).to_a.include?(year)
-        value
-      end
+      (first..second).to_a.include?(year)
+    
     end
-    binding.pry
-    incomes / incomes.count
+    p incomes
+    incomes.values
   end
 
 
