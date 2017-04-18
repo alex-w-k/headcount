@@ -98,6 +98,11 @@ class HeadcountAnalystTest < Minitest::Test
     end
   end
 
+  def test_top_statewide_test_year_over_year_multiple_districts
+    result = @ha.top_statewide_test_year_over_year_growth(grade: 3, top: 3, subject: :math)
+    assert_equal ["something", 0.6232], result
+  end
+
   # def test_high_school_graduation_rate_variation_trend
   #   trend = @ha.high_school_graduation_rate_variation_trend('ACADEMY 20', :against => 'COLORADO')
   #   assert_equal 0.717, trend[2008]

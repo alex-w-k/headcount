@@ -139,10 +139,26 @@ class HeadcountAnalyst
             districts_growth << [district.name, growth]
           end
         end
-        top = districts_growth.max_by do |district|
-          district[1]
+        if args[:top].nil?
+          top = districts_growth.max_by do |district|
+            district[1]
+          end
+          top_district = [top[0], (top[1]*1000).floor/1000.0]
+        else
+          number = args[:top]
+          top_districts = []
+          number.times do 
+            top = districts_growth.max_by do |district|
+              district[1]
+            end
+            # top = [top[0], (top[1]*1000).floor/1000.0]
+            top_districts << top
+            index_value = districts_growth.index(top)
+            districts_growth.slice!(index_value)
+          end
+          top_districts
         end
-        top_district = [top[0], (top[1]*1000).floor/1000.0]
+
       elsif args[:grade] == 8
         @dr.districts.each do |district|
           value = false
