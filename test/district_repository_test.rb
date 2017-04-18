@@ -1,6 +1,8 @@
+require_relative 'test_helper'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/district_repository'
+
 
 class DistrictRepositoryTest < Minitest::Test
 
@@ -14,10 +16,6 @@ class DistrictRepositoryTest < Minitest::Test
 
   def test_it_initializes
     assert_instance_of DistrictRepository, @dr
-  end
-
-  def test_it_can_read_contents
-    assert_instance_of Array, @dr.load_data(@kinder_data)
   end
 
   def test_it_can_find_by_name

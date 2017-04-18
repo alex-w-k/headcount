@@ -1,6 +1,8 @@
+require_relative 'test_helper'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/economic_profile_repository'
+
 
 class EconomicProfileRepositoryTest < Minitest::Test
 

@@ -1,7 +1,9 @@
+require_relative 'test_helper'
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/statewide_test'
 require_relative '../lib/statewide_test_repository'
+
 
 class StatewideTestTest < Minitest::Test
 
@@ -67,7 +69,7 @@ class StatewideTestTest < Minitest::Test
   def test_proficient_for_subject_by_race_in_year_method
     assert_equal 0.818, @statewide_test.proficient_for_subject_by_race_in_year(:math, :asian, 2012)
 
-    assert_raises UnknownRaceError do 
+    assert_raises UnknownDataError do 
       @statewide_test.proficient_for_subject_by_race_in_year(:math, :whote, 2012)
     end
   end
