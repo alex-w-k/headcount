@@ -151,8 +151,8 @@ class HeadcountAnalyst
             top = districts_growth.max_by do |district|
               district[1]
             end
-            # top = [top[0], (top[1]*1000).floor/1000.0]
-            top_districts << top
+            best_district = [top[0], (top[1]*1000).floor/1000.0]
+            top_districts << best_district
             index_value = districts_growth.index(top)
             districts_growth.slice!(index_value)
           end
