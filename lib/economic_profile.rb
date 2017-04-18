@@ -26,18 +26,15 @@ class EconomicProfile
   end
 
   def median_household_income_in_year(year)
-    # TODO need to be able to see if year is in range of the two in the array, 
-    # then pull all incomes it works for then average all of them
-
-
-    incomes = @median_household_income.keep_if do |key, value|
-      first = key[0]
-      second = key[1]
-      (first..second).to_a.include?(year)
-    
+    keys_for_use = @median_household_income.keys.map do |key|
+      if (key[0]..key[1]).to_a.include?(year)
+        key
+      end
     end
-    p incomes
-    incomes.values
+    incomes = keys_for_use.compact.map do |key|
+      @median_household_income[key]
+    end
+    (incomes.inject(:+) / incomes.count)
   end
 
 

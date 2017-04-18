@@ -31,8 +31,9 @@ class EconomicProfileTest < Minitest::Test
 
   def test_it_can_find_median_household_income_by_year
     assert_instance_of EconomicProfile, @profile
+    assert_equal 87635, @profile.median_household_income_in_year(2009)
     assert_equal 85060, @profile.median_household_income_in_year(2005)
-    assert_equal 85060, @profile.median_household_income_in_year(2009)
+    
   end
 
 end

@@ -120,5 +120,5 @@ class EconomicProfileRepository
 
 end
 
-# binding.pry
-# ''
+binding.pry
+''
