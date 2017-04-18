@@ -84,6 +84,18 @@ class HeadcountAnalystTest < Minitest::Test
     assert_equal ["WILEY RE-13 JT", 0.3], result
     result_1 = @ha.top_statewide_test_year_over_year_growth(grade: 3, subject: :reading)
     assert_equal ["CENTENNIAL R-1", 0.114], result_1
+    result_2 = @ha.top_statewide_test_year_over_year_growth(grade: 8, subject: :math)
+    assert_equal ["OURAY R-1", 0.242], result_2
+    result_3 = @ha.top_statewide_test_year_over_year_growth(grade: 8, subject: :reading)
+    assert_equal ["COTOPAXI RE-3", 0.13], result_3
+    result_4 = @ha.top_statewide_test_year_over_year_growth(grade: 3, subject: :writing)
+    assert_equal ["BETHUNE R-5", 0.148], result_4
+    assert_raises InsufficientInformationError do 
+      @ha.top_statewide_test_year_over_year_growth(subject: :reading)
+    end
+    assert_raises UnknownDataError do 
+      @ha.top_statewide_test_year_over_year_growth(grade: 9, subject: :reading)
+    end
   end
 
   # def test_high_school_graduation_rate_variation_trend
