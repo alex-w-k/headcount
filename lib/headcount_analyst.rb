@@ -11,6 +11,9 @@ class HeadcountAnalyst
     district = @dr.find_by_name(name)
     sum =
     district.enrollment.kindergarten_participation_by_year.reduce(0) do |a, b|
+      if b[1] == 'N/A'
+        b[1] = 0
+      end
       a + b[1]
     end
     average =
@@ -39,6 +42,9 @@ class HeadcountAnalyst
   def average_high_school_graduation_rates_for_district(name)
     district = @dr.find_by_name(name)
     sum = district.enrollment.graduation_rate_by_year.reduce(0) do |a, b|
+      if b[1] == 'N/A'
+        b[1] = 0
+      end
       a + b[1]
     end
     average = sum / district.enrollment.graduation_rate_by_year.length
@@ -96,9 +102,7 @@ class HeadcountAnalyst
   def statewide_correlation
     counter = 0
     @dr.districts.each do |district|
-      if district.name == 'COLORADO'
-        next
-      end
+      next if district.name == 'COLORADO'
       name = district.name
       variation =
         kindergarten_participation_against_high_school_graduation(name)

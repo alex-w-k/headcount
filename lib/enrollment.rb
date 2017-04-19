@@ -17,7 +17,7 @@ class Enrollment
 
   def kindergarten_participation_by_year
     @kindergarten_participation.reduce({}) do |key, value|
-      key.merge(value.first => truncate_to_3_decimal_points(value.last))
+      key.merge(value.first => value.last)
     end
   end
 
@@ -27,17 +27,11 @@ class Enrollment
 
   def graduation_rate_by_year
     @high_school_graduation_rates.reduce({}) do |key, value|
-      key.merge(value.first => truncate_to_3_decimal_points(value.last))
+      key.merge(value.first => value.last)
     end
   end
 
   def graduation_rate_in_year(year)
     graduation_rate_by_year[year]
-  end
-
-  private
-
-  def truncate_to_3_decimal_points(num)
-    (num.to_f*1000).floor/1000.0
   end
 end

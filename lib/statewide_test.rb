@@ -11,14 +11,8 @@ class StatewideTest
 
   def initialize(args)
     @name = args[:name]
-    @third_grade = args[:third_grade]
-    if @third_grade.nil?
-      @third_grade = Hash.new
-    end
-    @eighth_grade = args[:eighth_grade]
-    if @eighth_grade.nil?
-      @eighth_grade = Hash.new
-    end
+    @third_grade = args[:third_grade] || Hash.new
+    @eighth_grade = args[:eighth_grade] || Hash.new
     @race_data = args[:race_data]
     if @race_data.nil?
       @race_data = {:all_students=>{},
