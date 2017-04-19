@@ -1,4 +1,3 @@
-require 'pry'
 require 'csv'
 require_relative 'custom_errors'
 
@@ -42,7 +41,7 @@ class EconomicProfile
   end
 
   def median_household_income_average
-    (@median_household_income.values.inject(:+) / 
+    (@median_household_income.values.inject(:+) /
     @median_household_income.values.count)
   end
 
