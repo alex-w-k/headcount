@@ -1,6 +1,3 @@
-require_relative 'enrollment'
-require 'csv'
-
 class District
   attr_reader :name
   attr_accessor :enrollment, :statewide_test, :economic_profile
@@ -11,5 +8,4 @@ class District
     @statewide_test = nil
     @economic_profile = nil
   end
-
 end

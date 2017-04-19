@@ -95,24 +95,24 @@ class HeadcountAnalyst
 
   def statewide_correlation
     counter = 0
-      @dr.districts.each do |district|
-        if district.name == 'COLORADO'
-          next
-        end
-        name = district.name
-        variation =
-          kindergarten_participation_against_high_school_graduation(name)
-        if variation > 0.6 && variation < 1.5
-          counter += 1
-        end
+    @dr.districts.each do |district|
+      if district.name == 'COLORADO'
+        next
       end
-      percent = counter / (@dr.districts.length - 1)
-      if percent >= 0.7
-        true
-      else
-        false
+      name = district.name
+      variation =
+        kindergarten_participation_against_high_school_graduation(name)
+      if variation > 0.6 && variation < 1.5
+        counter += 1
       end
     end
+    percent = counter / (@dr.districts.length - 1)
+    if percent >= 0.7
+      true
+    else
+      false
+    end
+  end
 
   def top_statewide_test_year_over_year_growth(args)
     if args[:grade] == 3

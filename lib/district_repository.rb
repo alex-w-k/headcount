@@ -3,35 +3,49 @@ require_relative 'district'
 require_relative 'enrollment_repository'
 require_relative 'statewide_test_repository'
 require_relative 'economic_profile_repository'
+require_relative 'parser'
 
 class DistrictRepository
+  include Parser
+
   attr_reader :districts
 
   def load_data(args)
     data_set = args[:enrollment][:kindergarten]
     process_district_data(data_set)
     if args[:enrollment]
-      er = EnrollmentRepository.new
-      @enrollments = er.load_data(args)
-      add_enrollment_to_district
+      load_enrollments(args)
     end
     if args[:statewide_testing]
-      str = StatewideTestRepository.new
-      @statewide_tests = str.load_data(args)
-      add_statewide_tests_to_district
+      load_testing(args)
     end
     if args[:economic_profile]
-      epr = EconomicProfileRepository.new
-      @economic_profiles = epr.load_data(args)
-      add_economic_profiles_to_district
+      load_profiles(args)
     end
   end
 
-  def process_district_data(data_set)
+  def load_enrollments(args)
+    er = EnrollmentRepository.new
+    @enrollments = er.load_data(args)
+    add_enrollment_to_district
+  end
 
+  def load_testing(args)
+    str = StatewideTestRepository.new
+    @statewide_tests = str.load_data(args)
+    add_statewide_tests_to_district
+  end
+
+  def load_profiles(args)
+    epr = EconomicProfileRepository.new
+    @economic_profiles = epr.load_data(args)
+    add_economic_profiles_to_district
+  end
+
+  def process_district_data(data_set)
     contents = CSV.open(data_set, {headers: true, header_converters: :symbol})
     @districts = contents.collect do |row|
-      row[:name] = row[:location].upcase
+      parse_name(row)
       District.new(row)
     end
     districts.uniq! {|district| district.name}

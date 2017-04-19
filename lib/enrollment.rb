@@ -1,4 +1,3 @@
-require 'pry'
 require 'csv'
 
 ##
@@ -12,14 +11,8 @@ class Enrollment
 
   def initialize(args)
     @name = args[:name]
-    @kindergarten_participation = args[:kindergarten_participation]
-    if @kindergarten_participation.nil?
-      @kindergarten_participation = Hash.new
-    end
-    @high_school_graduation_rates = args[:high_school_graduation]
-    if @high_school_graduation_rates.nil?
-      @high_school_graduation_rates = Hash.new
-    end
+    @kindergarten_participation = args[:kindergarten_participation] || Hash.new
+    @high_school_graduation_rates = args[:high_school_graduation] || Hash.new
   end
 
   def kindergarten_participation_by_year
