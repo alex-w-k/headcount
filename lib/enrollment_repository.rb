@@ -8,7 +8,8 @@ class EnrollmentRepository
   def load_data(args)
     @kinder_data_set = args[:enrollment][:kindergarten]
     @hs_data_set = args[:enrollment][:high_school_graduation]
-    kindergarten_contents = CSV.open(@kinder_data_set, {headers: true, header_converters: :symbol})
+    kindergarten_contents = CSV.open(@kinder_data_set,
+      {headers: true, header_converters: :symbol})
     @enrollments = collect_enrollments(kindergarten_contents)
     uniqueize_enrollments
     add_kindergarten_data_to_enrollments
@@ -33,7 +34,8 @@ class EnrollmentRepository
 
 
   def add_kindergarten_data_to_enrollments
-    kindergarten_contents = CSV.open(@kinder_data_set, {headers: true, header_converters: :symbol})
+    kindergarten_contents =
+      CSV.open(@kinder_data_set, {headers: true, header_converters: :symbol})
     kindergarten_contents.each do |row|
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
@@ -41,13 +43,15 @@ class EnrollmentRepository
       index = enrollments.find_index do |enrollment|
             enrollment.name == row[:location].upcase
           end
-      enrollments[index].kindergarten_participation[row[:timeframe]] = row[:data]
+      enrollments[index].kindergarten_participation[row[:timeframe]] =
+        row[:data]
     end
     enrollments
   end
 
   def add_high_school_data_to_enrollments
-    high_school_grad_contents = CSV.open(@hs_data_set, {headers: true, header_converters: :symbol})
+    high_school_grad_contents = CSV.open(@hs_data_set,
+      {headers: true, header_converters: :symbol})
     high_school_grad_contents.each do |row|
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
@@ -55,7 +59,8 @@ class EnrollmentRepository
       index = enrollments.find_index do |enrollment|
             enrollment.name == row[:location].upcase
           end
-      enrollments[index].high_school_graduation_rates[row[:timeframe]] = row[:data]
+      enrollments[index].high_school_graduation_rates[row[:timeframe]] =
+        row[:data]
     end
     enrollments
   end
@@ -66,8 +71,4 @@ class EnrollmentRepository
     end
   end
 
-
 end
-
-# binding.pry
-# ""
