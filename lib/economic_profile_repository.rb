@@ -90,7 +90,8 @@ class EconomicProfileRepository
         if row[:dataformat] == 'Percent'
           row[:data] = ((row[:data].to_f)*1000).floor/1000.0
           if !profiles[index].free_or_reduced_price_lunch[row[:timeframe]].nil?
-            profiles[index].free_or_reduced_price_lunch[row[:timeframe]].merge!(percentage: row[:data])
+            profiles[index].free_or_reduced_price_lunch[row[
+              :timeframe]].merge!(percentage: row[:data])
           else
             profiles[index].free_or_reduced_price_lunch[row[:timeframe]] =
               {percentage: row[:data]}
@@ -98,7 +99,8 @@ class EconomicProfileRepository
         elsif row[:dataformat] == 'Number'
           row[:data] = row[:data].to_i
           if !profiles[index].free_or_reduced_price_lunch[row[:timeframe]].nil?
-            profiles[index].free_or_reduced_price_lunch[row[:timeframe]].merge!(total: row[:data])
+            profiles[index].free_or_reduced_price_lunch[row[
+              :timeframe]].merge!(total: row[:data])
           else
             profiles[index].free_or_reduced_price_lunch[row[:timeframe]] =
               {total: row[:data]}
