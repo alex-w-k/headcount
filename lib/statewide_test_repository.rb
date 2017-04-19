@@ -120,21 +120,27 @@ class StatewideTestRepository
   def add_third_grade_scores_to_tests(row)
     if row[:score] == 'math'
       if tests[index_finder(row)].third_grade[row[:timeframe]]
-        tests[index_finder(row)].third_grade[row[:timeframe]].merge!(math: row[:data])
+        tests[index_finder(row)].third_grade[row[:timeframe]].merge!(
+          math: row[:data])
       else
-        tests[index_finder(row)].third_grade[row[:timeframe]] = {math: row[:data]}
+        tests[index_finder(row)].third_grade[row[:timeframe]] =
+          {math: row[:data]}
       end
     elsif row[:score] == 'reading'
       if tests[index_finder(row)].third_grade[row[:timeframe]]
-        tests[index_finder(row)].third_grade[row[:timeframe]].merge!(reading: row[:data])
+        tests[index_finder(row)].third_grade[row[:timeframe]].merge!(
+          reading: row[:data])
       else
-        tests[index_finder(row)].third_grade[row[:timeframe]] = {reading: row[:data]}
+        tests[index_finder(row)].third_grade[row[:timeframe]] =
+          {reading: row[:data]}
       end
     elsif row[:score] == 'writing'
       if tests[index_finder(row)].third_grade[row[:timeframe]]
-        tests[index_finder(row)].third_grade[row[:timeframe]].merge!(writing: row[:data])
+        tests[index_finder(row)].third_grade[row[:timeframe]].merge!(
+          writing: row[:data])
       else
-        tests[index_finder(row)].third_grade[row[:timeframe]] = {writing: row[:data]}
+        tests[index_finder(row)].third_grade[row[:timeframe]] =
+          {writing: row[:data]}
       end
     end
   end
@@ -142,21 +148,27 @@ class StatewideTestRepository
   def add_eighth_grade_scores_to_tests(row)
     if row[:score] == 'math'
       if tests[index_finder(row)].eighth_grade[row[:timeframe]]
-        tests[index_finder(row)].eighth_grade[row[:timeframe]].merge!(math: row[:data])
+        tests[index_finder(row)].eighth_grade[row[:timeframe]].merge!(
+          math: row[:data])
       else
-        tests[index_finder(row)].eighth_grade[row[:timeframe]] = {math: row[:data]}
+        tests[index_finder(row)].eighth_grade[row[:timeframe]] =
+          {math: row[:data]}
       end
     elsif row[:score] == 'reading'
       if tests[index_finder(row)].eighth_grade[row[:timeframe]]
-        tests[index_finder(row)].eighth_grade[row[:timeframe]].merge!(reading: row[:data])
+        tests[index_finder(row)].eighth_grade[row[:timeframe]].merge!(
+          reading: row[:data])
       else
-        tests[index_finder(row)].eighth_grade[row[:timeframe]] = {reading: row[:data]}
+        tests[index_finder(row)].eighth_grade[row[:timeframe]] =
+          {reading: row[:data]}
       end
     elsif row[:score] == 'writing'
       if tests[index_finder(row)].eighth_grade[row[:timeframe]]
-        tests[index_finder(row)].eighth_grade[row[:timeframe]].merge!(writing: row[:data])
+        tests[index_finder(row)].eighth_grade[row[:timeframe]].merge!(
+          writing: row[:data])
       else
-        tests[index_finder(row)].eighth_grade[row[:timeframe]] = {writing: row[:data]}
+        tests[index_finder(row)].eighth_grade[row[:timeframe]] =
+          {writing: row[:data]}
       end
     end
   end
@@ -164,64 +176,64 @@ class StatewideTestRepository
   def process_race_data(row, subject)
     if row[:race] == 'all students'
       if tests[index_finder(row)].race_data[:all_students][row[:timeframe]]
-        tests[index_finder(row)].race_data[:all_students][row[:timeframe]].merge!(
-          subject => row[:data])
+        tests[index_finder(row)].race_data[:all_students][
+          row[:timeframe]].merge!(subject => row[:data])
       else
         tests[index_finder(row)].race_data[:all_students][row[:timeframe]] =
           {subject => row[:data]}
       end
     elsif row[:race] == 'asian'
       if tests[index_finder(row)].race_data[:asian][row[:timeframe]]
-        tests[index_finder(row)].race_data[:asian][row[:timeframe]].merge!(
-          subject => row[:data])
+        tests[index_finder(row)].race_data[:asian][
+          row[:timeframe]].merge!(subject => row[:data])
       else
         tests[index_finder(row)].race_data[:asian][row[:timeframe]] =
           {subject => row[:data]}
       end
     elsif row[:race] == 'black'
       if tests[index_finder(row)].race_data[:black][row[:timeframe]]
-        tests[index_finder(row)].race_data[:black][row[:timeframe]].merge!(
-          subject => row[:data])
+        tests[index_finder(row)].race_data[:black][
+          row[:timeframe]].merge!(subject => row[:data])
       else
         tests[index_finder(row)].race_data[:black][row[:timeframe]] =
           {subject => row[:data]}
       end
     elsif row[:race] == 'hawaiian/pacific islander'
       if tests[index_finder(row)].race_data[:pacific_islander][row[:timeframe]]
-        tests[index_finder(row)].race_data[:pacific_islander][row[:timeframe]].merge!(
-          subject => row[:data])
+        tests[index_finder(row)].race_data[:pacific_islander][
+          row[:timeframe]].merge!(subject => row[:data])
       else
-        tests[index_finder(row)].race_data[:pacific_islander][row[:timeframe]] =
-          {subject => row[:data]}
+        tests[index_finder(row)].race_data[:pacific_islander][
+          row[:timeframe]] = {subject => row[:data]}
       end
     elsif row[:race] == 'hispanic'
       if tests[index_finder(row)].race_data[:hispanic][row[:timeframe]]
-        tests[index_finder(row)].race_data[:hispanic][row[:timeframe]].merge!(
-          subject => row[:data])
+        tests[index_finder(row)].race_data[:hispanic][
+          row[:timeframe]].merge!(subject => row[:data])
       else
         tests[index_finder(row)].race_data[:hispanic][row[:timeframe]] =
           {subject => row[:data]}
       end
     elsif row[:race] == 'native american'
       if tests[index_finder(row)].race_data[:native_american][row[:timeframe]]
-        tests[index_finder(row)].race_data[:native_american][row[:timeframe]].merge!(
-          subject => row[:data])
+        tests[index_finder(row)].race_data[:native_american][
+          row[:timeframe]].merge!(subject => row[:data])
       else
         tests[index_finder(row)].race_data[:native_american][row[:timeframe]] =
           {subject => row[:data]}
       end
     elsif row[:race] == 'two or more'
       if tests[index_finder(row)].race_data[:two_or_more][row[:timeframe]]
-        tests[index_finder(row)].race_data[:two_or_more][row[:timeframe]].merge!(
-          subject => row[:data])
+        tests[index_finder(row)].race_data[:two_or_more][
+          row[:timeframe]].merge!(subject => row[:data])
       else
         tests[index_finder(row)].race_data[:two_or_more][row[:timeframe]] =
           {subject => row[:data]}
       end
     elsif row[:race] == 'white'
       if tests[index_finder(row)].race_data[:white][row[:timeframe]]
-        tests[index_finder(row)].race_data[:white][row[:timeframe]].merge!(
-          subject => row[:data])
+        tests[index_finder(row)].race_data[:white][
+          row[:timeframe]].merge!(subject => row[:data])
       else
         tests[index_finder(row)].race_data[:white][row[:timeframe]] =
           {subject => row[:data]}

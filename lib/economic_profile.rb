@@ -11,21 +11,14 @@ class EconomicProfile
     @children_in_poverty = args[:children_in_poverty] || Hash.new
     @free_or_reduced_price_lunch =
       args[:free_or_reduced_price_lunch] || Hash.new
-    @title_i = args[:title_i]
-    if @title_i.nil?
-      @title_i = Hash.new
-    end
+    @title_i = args[:title_i] || Hash.new
   end
 
   def median_household_income_in_year(year)
     keys_for_use = @median_household_income.keys.map do |key|
-      if (key[0]..key[1]).to_a.include?(year)
-        key
-      end
+      key if (key[0]..key[1]).to_a.include?(year)
     end
-    if keys_for_use.compact.count == 0
-      raise UnknownDataError
-    end
+    raise UnknownDataError if keys_for_use.compact.count == 0
     incomes = keys_for_use.compact.map do |key|
       @median_household_income[key]
     end

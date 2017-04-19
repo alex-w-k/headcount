@@ -23,4 +23,19 @@ module Parser
   def parse_race_ethnicity(row)
     row[:race] = row[:race_ethnicity].downcase
   end
+
+  def parse_integers(row)
+    if row[:data] == 'N/A' || row[:data] == ' ' || row[:data] == 'NA'
+      row[:data] = 'N/A'
+    else
+      row[:data] = row[:data].to_i
+    end
+  end
+
+  def parse_year_range(row)
+    row[:timeframe] = row[:timeframe].split('-')
+    row[:timeframe].map! do |integer|
+      integer.to_i
+    end
+  end
 end
