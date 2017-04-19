@@ -10,6 +10,18 @@ class DistrictRepositoryTest < Minitest::Test
                    { :kindergarten =>
                     './data/Kindergartners in full-day program.csv' 
                     }}
+    @economic_data = {
+                      :enrollment => {
+                        :kindergarten =>
+                        './data/Kindergartners in full-day program.csv' 
+                        },
+                      :economic_profile => {
+                        :median_household_income => "./data/Median household income.csv",
+                        :children_in_poverty => "./data/School-aged children in poverty.csv",
+                        :free_or_reduced_price_lunch => "./data/Students qualifying for free or reduced price lunch.csv",
+                        :title_i => "./data/Title I students.csv"
+                      }
+                    }
   end
 
   def test_it_initializes
@@ -37,6 +49,14 @@ class DistrictRepositoryTest < Minitest::Test
 
     assert_instance_of Enrollment, district.enrollment
     assert_equal 0.436, district.enrollment.kindergarten_participation_in_year(2010)
+  end
+
+  def test_it_can_load_economic_data
+    @dr.load_data(@economic_data)
+
+    district = @dr.find_by_name('ACADEMY 20')
+    assert_equal 'ACADEMY 20', district.name
+    assert_instance_of EconomicProfile, district.economic_profile
   end
 
 end

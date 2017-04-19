@@ -26,6 +26,4 @@ class EconomicProfileRepositoryTest < Minitest::Test
   	assert_instance_of EconomicProfile, @profile
   	assert_equal 'ACADEMY 20', @profile.name
   end
-
-
 end

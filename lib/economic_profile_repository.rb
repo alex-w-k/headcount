@@ -108,7 +108,7 @@ class EconomicProfileRepository
       {headers: true, header_converters: :symbol})
     title_i_contents.each do |row|
       parse_name(row)
-      parse_year_range(row)
+      parse_timeframe(row)
       parse_data(row)
       profiles[index_finder(row)].title_i[row[:timeframe]] = row[:data]
     end
