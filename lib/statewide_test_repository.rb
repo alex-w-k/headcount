@@ -50,19 +50,19 @@ class StatewideTestRepository
           test.name == row[:location].upcase
       end
       if row[:score] == 'math'
-        if !tests[index].third_grade[row[:timeframe]].nil?
+        if tests[index].third_grade[row[:timeframe]]
           tests[index].third_grade[row[:timeframe]].merge!(math: row[:data])
         else
           tests[index].third_grade[row[:timeframe]] = {math: row[:data]}
         end
       elsif row[:score] == 'reading'
-        if !tests[index].third_grade[row[:timeframe]].nil?
+        if tests[index].third_grade[row[:timeframe]]
           tests[index].third_grade[row[:timeframe]].merge!(reading: row[:data])
         else
           tests[index].third_grade[row[:timeframe]] = {reading: row[:data]}
         end
       elsif row[:score] == 'writing'
-        if !tests[index].third_grade[row[:timeframe]].nil?
+        if tests[index].third_grade[row[:timeframe]]
           tests[index].third_grade[row[:timeframe]].merge!(writing: row[:data])
         else
           tests[index].third_grade[row[:timeframe]] = {writing: row[:data]}
@@ -88,19 +88,19 @@ class StatewideTestRepository
           test.name == row[:location].upcase
       end
       if row[:score] == 'math'
-        if !tests[index].eighth_grade[row[:timeframe]].nil?
+        if tests[index].eighth_grade[row[:timeframe]]
           tests[index].eighth_grade[row[:timeframe]].merge!(math: row[:data])
         else
           tests[index].eighth_grade[row[:timeframe]] = {math: row[:data]}
         end
       elsif row[:score] == 'reading'
-        if !tests[index].eighth_grade[row[:timeframe]].nil?
+        if tests[index].eighth_grade[row[:timeframe]]
           tests[index].eighth_grade[row[:timeframe]].merge!(reading: row[:data])
         else
           tests[index].eighth_grade[row[:timeframe]] = {reading: row[:data]}
         end
       elsif row[:score] == 'writing'
-        if !tests[index].eighth_grade[row[:timeframe]].nil?
+        if tests[index].eighth_grade[row[:timeframe]]
           tests[index].eighth_grade[row[:timeframe]].merge!(writing: row[:data])
         else
           tests[index].eighth_grade[row[:timeframe]] = {writing: row[:data]}
@@ -125,7 +125,7 @@ class StatewideTestRepository
           test.name == row[:location].upcase
       end
       if row[:race] == 'all students'
-        if !tests[index].race_data[:all_students][row[:timeframe]].nil?
+        if tests[index].race_data[:all_students][row[:timeframe]]
           tests[index].race_data[:all_students][row[:timeframe]].merge!(
             math: row[:data])
         else
@@ -133,7 +133,7 @@ class StatewideTestRepository
             {:math => row[:data]}
         end
       elsif row[:race] == 'asian'
-        if !tests[index].race_data[:asian][row[:timeframe]].nil?
+        if tests[index].race_data[:asian][row[:timeframe]]
           tests[index].race_data[:asian][row[:timeframe]].merge!(
             math: row[:data])
         else
@@ -141,7 +141,7 @@ class StatewideTestRepository
             {:math => row[:data]}
         end
       elsif row[:race] == 'black'
-        if !tests[index].race_data[:black][row[:timeframe]].nil?
+        if tests[index].race_data[:black][row[:timeframe]]
           tests[index].race_data[:black][row[:timeframe]].merge!(
             math: row[:data])
         else
@@ -149,7 +149,7 @@ class StatewideTestRepository
             {:math => row[:data]}
         end
       elsif row[:race] == 'hawaiian/pacific islander'
-        if !tests[index].race_data[:pacific_islander][row[:timeframe]].nil?
+        if tests[index].race_data[:pacific_islander][row[:timeframe]]
           tests[index].race_data[:pacific_islander][row[:timeframe]].merge!(
             math: row[:data])
         else
@@ -157,7 +157,7 @@ class StatewideTestRepository
             {:math => row[:data]}
         end
       elsif row[:race] == 'hispanic'
-        if !tests[index].race_data[:hispanic][row[:timeframe]].nil?
+        if tests[index].race_data[:hispanic][row[:timeframe]]
           tests[index].race_data[:hispanic][row[:timeframe]].merge!(
             math: row[:data])
         else
@@ -165,7 +165,7 @@ class StatewideTestRepository
             {:math => row[:data]}
         end
       elsif row[:race] == 'native american'
-        if !tests[index].race_data[:native_american][row[:timeframe]].nil?
+        if tests[index].race_data[:native_american][row[:timeframe]]
           tests[index].race_data[:native_american][row[:timeframe]].merge!(
             math: row[:data])
         else
@@ -173,7 +173,7 @@ class StatewideTestRepository
             {:math => row[:data]}
         end
       elsif row[:race] == 'two or more'
-        if !tests[index].race_data[:two_or_more][row[:timeframe]].nil?
+        if tests[index].race_data[:two_or_more][row[:timeframe]]
           tests[index].race_data[:two_or_more][row[:timeframe]].merge!(
             math: row[:data])
         else
@@ -181,7 +181,7 @@ class StatewideTestRepository
             {:math => row[:data]}
         end
       elsif row[:race] == 'white'
-        if !tests[index].race_data[:white][row[:timeframe]].nil?
+        if tests[index].race_data[:white][row[:timeframe]]
           tests[index].race_data[:white][row[:timeframe]].merge!(
             math: row[:data])
         else
@@ -209,7 +209,7 @@ class StatewideTestRepository
           test.name == row[:location].upcase
       end
       if row[:race] == 'all students'
-        if !tests[index].race_data[:all_students][row[:timeframe]].nil?
+        if tests[index].race_data[:all_students][row[:timeframe]]
           tests[index].race_data[:all_students][row[:timeframe]].merge!(
             reading: row[:data])
         else
@@ -217,7 +217,7 @@ class StatewideTestRepository
             {:reading => row[:data]}
         end
       elsif row[:race] == 'asian'
-        if !tests[index].race_data[:asian][row[:timeframe]].nil?
+        if tests[index].race_data[:asian][row[:timeframe]]
           tests[index].race_data[:asian][row[:timeframe]].merge!(
             reading: row[:data])
         else
@@ -225,7 +225,7 @@ class StatewideTestRepository
             {:reading => row[:data]}
         end
       elsif row[:race] == 'black'
-        if !tests[index].race_data[:black][row[:timeframe]].nil?
+        if tests[index].race_data[:black][row[:timeframe]]
           tests[index].race_data[:black][row[:timeframe]].merge!(
             reading: row[:data])
         else
@@ -233,7 +233,7 @@ class StatewideTestRepository
             {:reading => row[:data]}
         end
       elsif row[:race] == 'hawaiian/pacific islander'
-        if !tests[index].race_data[:pacific_islander][row[:timeframe]].nil?
+        if tests[index].race_data[:pacific_islander][row[:timeframe]]
           tests[index].race_data[:pacific_islander][row[:timeframe]].merge!(
             reading: row[:data])
         else
@@ -241,7 +241,7 @@ class StatewideTestRepository
             {:reading => row[:data]}
         end
       elsif row[:race] == 'hispanic'
-        if !tests[index].race_data[:hispanic][row[:timeframe]].nil?
+        if tests[index].race_data[:hispanic][row[:timeframe]]
           tests[index].race_data[:hispanic][row[:timeframe]].merge!(
             reading: row[:data])
         else
@@ -249,7 +249,7 @@ class StatewideTestRepository
             {:reading => row[:data]}
         end
       elsif row[:race] == 'native american'
-        if !tests[index].race_data[:native_american][row[:timeframe]].nil?
+        if tests[index].race_data[:native_american][row[:timeframe]]
           tests[index].race_data[:native_american][row[:timeframe]].merge!(
             reading: row[:data])
         else
@@ -257,7 +257,7 @@ class StatewideTestRepository
             {:reading => row[:data]}
         end
       elsif row[:race] == 'two or more'
-        if !tests[index].race_data[:two_or_more][row[:timeframe]].nil?
+        if tests[index].race_data[:two_or_more][row[:timeframe]]
           tests[index].race_data[:two_or_more][row[:timeframe]].merge!(
             reading: row[:data])
         else
@@ -265,7 +265,7 @@ class StatewideTestRepository
             {:reading => row[:data]}
         end
       elsif row[:race] == 'white'
-        if !tests[index].race_data[:white][row[:timeframe]].nil?
+        if tests[index].race_data[:white][row[:timeframe]]
           tests[index].race_data[:white][row[:timeframe]].merge!(
             reading: row[:data])
         else
@@ -293,7 +293,7 @@ class StatewideTestRepository
           test.name == row[:location].upcase
       end
       if row[:race] == 'all students'
-        if !tests[index].race_data[:all_students][row[:timeframe]].nil?
+        if tests[index].race_data[:all_students][row[:timeframe]]
           tests[index].race_data[:all_students][row[:timeframe]].merge!(
             writing: row[:data])
         else
@@ -301,7 +301,7 @@ class StatewideTestRepository
             {:writing => row[:data]}
         end
       elsif row[:race] == 'asian'
-        if !tests[index].race_data[:asian][row[:timeframe]].nil?
+        if tests[index].race_data[:asian][row[:timeframe]]
           tests[index].race_data[:asian][row[:timeframe]].merge!(
             writing: row[:data])
         else
@@ -309,7 +309,7 @@ class StatewideTestRepository
             {:writing => row[:data]}
         end
       elsif row[:race] == 'black'
-        if !tests[index].race_data[:black][row[:timeframe]].nil?
+        if tests[index].race_data[:black][row[:timeframe]]
           tests[index].race_data[:black][row[:timeframe]].merge!(
             writing: row[:data])
         else
@@ -317,7 +317,7 @@ class StatewideTestRepository
             {:writing => row[:data]}
         end
       elsif row[:race] == 'hawaiian/pacific islander'
-        if !tests[index].race_data[:pacific_islander][row[:timeframe]].nil?
+        if tests[index].race_data[:pacific_islander][row[:timeframe]]
           tests[index].race_data[:pacific_islander][row[:timeframe]].merge!(
             writing: row[:data])
         else
@@ -325,7 +325,7 @@ class StatewideTestRepository
             {:writing => row[:data]}
         end
       elsif row[:race] == 'hispanic'
-        if !tests[index].race_data[:hispanic][row[:timeframe]].nil?
+        if tests[index].race_data[:hispanic][row[:timeframe]]
           tests[index].race_data[:hispanic][row[:timeframe]].merge!(
             writing: row[:data])
         else
@@ -333,7 +333,7 @@ class StatewideTestRepository
             {:writing => row[:data]}
         end
       elsif row[:race] == 'native american'
-        if !tests[index].race_data[:native_american][row[:timeframe]].nil?
+        if tests[index].race_data[:native_american][row[:timeframe]]
           tests[index].race_data[:native_american][row[:timeframe]].merge!(
             writing: row[:data])
         else
@@ -341,7 +341,7 @@ class StatewideTestRepository
             {:writing => row[:data]}
         end
       elsif row[:race] == 'two or more'
-        if !tests[index].race_data[:two_or_more][row[:timeframe]].nil?
+        if tests[index].race_data[:two_or_more][row[:timeframe]]
           tests[index].race_data[:two_or_more][row[:timeframe]].merge!(
             writing: row[:data])
         else
@@ -349,7 +349,7 @@ class StatewideTestRepository
             {:writing => row[:data]}
         end
       elsif row[:race] == 'white'
-        if !tests[index].race_data[:white][row[:timeframe]].nil?
+        if tests[index].race_data[:white][row[:timeframe]]
           tests[index].race_data[:white][row[:timeframe]].merge!(
             writing: row[:data])
         else

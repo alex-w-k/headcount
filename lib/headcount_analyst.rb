@@ -253,81 +253,81 @@ class HeadcountAnalyst
 
   def top_statewide_test_year_growth_all_subjects_weighted(
     args, year_data, district, districts_growth)
-      value = false
-      until value
-        if year_data.length == 0
-          value = true
-        elsif year_data[0][1][:math] == "N/A" ||
-              year_data[0][1][:reading] == "N/A" ||
-              year_data[0][1][:writing] == "N/A"
-          year_data.slice!(0)
-        else
-          value = true
-        end
+    value = false
+    until value
+      if year_data.length == 0
+        value = true
+      elsif year_data[0][1][:math] == "N/A" ||
+            year_data[0][1][:reading] == "N/A" ||
+            year_data[0][1][:writing] == "N/A"
+        year_data.slice!(0)
+      else
+        value = true
       end
-      value = false
-      until value
-        if year_data.length == 0
-          value = true
-        elsif year_data[-1][1][:math] == "N/A" ||
-              year_data[-1][1][:reading] == "N/A" ||
-              year_data[-1][1][:writing] == "N/A"
-          year_data.slice!(-1)
-        else
-          value = true
-        end
+    end
+    value = false
+    until value
+      if year_data.length == 0
+        value = true
+      elsif year_data[-1][1][:math] == "N/A" ||
+            year_data[-1][1][:reading] == "N/A" ||
+            year_data[-1][1][:writing] == "N/A"
+        year_data.slice!(-1)
+      else
+        value = true
       end
-      year_data = year_data.to_h
-      if year_data.length > 1
-        math_growth = (year_data.max[1][:math] -
-                       year_data.min[1][:math]) /
-                  (year_data.max[0] - year_data.min[0])
-        reading_growth = (year_data.max[1][:reading] -
-                          year_data.min[1][:reading]) /
-                  (year_data.max[0] - year_data.min[0])
-        writing_growth = (year_data.max[1][:writing] -
-                          year_data.min[1][:writing]) /
-                  (year_data.max[0] - year_data.min[0])
-        growth = (math_growth + reading_growth + writing_growth)/3
-        if args[:weighting].nil?
-          districts_growth << [district.name, growth] unless unwanted(district)
-        else
-          weighted_growth = (math_growth * args[:weighting][:math]) +
-                            (reading_growth * args[:weighting][:reading]) +
-                            (writing_growth * args[:weighting][:writing])
-          districts_growth << [district.name, growth, weighted_growth]
-        end
+    end
+    year_data = year_data.to_h
+    if year_data.length > 1
+      math_growth = (year_data.max[1][:math] -
+                     year_data.min[1][:math]) /
+                (year_data.max[0] - year_data.min[0])
+      reading_growth = (year_data.max[1][:reading] -
+                        year_data.min[1][:reading]) /
+                (year_data.max[0] - year_data.min[0])
+      writing_growth = (year_data.max[1][:writing] -
+                        year_data.min[1][:writing]) /
+                (year_data.max[0] - year_data.min[0])
+      growth = (math_growth + reading_growth + writing_growth)/3
+      if args[:weighting].nil?
+        districts_growth << [district.name, growth] unless unwanted(district)
+      else
+        weighted_growth = (math_growth * args[:weighting][:math]) +
+                          (reading_growth * args[:weighting][:reading]) +
+                          (writing_growth * args[:weighting][:writing])
+        districts_growth << [district.name, growth, weighted_growth]
       end
-     select_top_district_or_districts(args, districts_growth)
+    end
+   select_top_district_or_districts(args, districts_growth)
   end
 
   def select_top_district_or_districts(args, districts_growth)
-      if args[:top].nil?
-        if args[:weighting].nil?
-          top = districts_growth.max_by do |district|
-            district[1]
-          end
-        top_district = [top[0], (top[1]*1000).floor/1000.0]
-        else
-          top = districts_growth.max_by do |district|
-            district[2]
-          end
-        top_district = [top[0], (top[2]*1000).floor/1000.0]
+    if args[:top].nil?
+      if args[:weighting].nil?
+        top = districts_growth.max_by do |district|
+          district[1]
         end
+      top_district = [top[0], (top[1]*1000).floor/1000.0]
       else
-        number = args[:top]
-        top_districts = []
-        number.times do
-          top = districts_growth.max_by do |district|
-            district[1]
-          end
-          best_district = [top[0], (top[1]*1000).floor/1000.0]
-          top_districts << best_district
-          index_value = districts_growth.index(top)
-          districts_growth.slice!(index_value)
+        top = districts_growth.max_by do |district|
+          district[2]
         end
-        top_districts
+      top_district = [top[0], (top[2]*1000).floor/1000.0]
       end
+    else
+      number = args[:top]
+      top_districts = []
+      number.times do
+        top = districts_growth.max_by do |district|
+          district[1]
+        end
+        best_district = [top[0], (top[1]*1000).floor/1000.0]
+        top_districts << best_district
+        index_value = districts_growth.index(top)
+        districts_growth.slice!(index_value)
+      end
+      top_districts
+    end
   end
 
   def unwanted(district)
