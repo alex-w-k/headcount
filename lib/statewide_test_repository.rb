@@ -366,5 +366,4 @@ class StatewideTestRepository
       test.name == name
     end
   end
-
 end

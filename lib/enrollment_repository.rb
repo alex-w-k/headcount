@@ -1,4 +1,3 @@
-require 'pry'
 require 'csv'
 require_relative 'enrollment'
 
@@ -70,5 +69,4 @@ class EnrollmentRepository
       enrollment.name == name
     end
   end
-
 end

@@ -47,8 +47,4 @@ class Enrollment
   def truncate_to_3_decimal_points(num)
     (num.to_f*1000).floor/1000.0
   end
-
 end
-
-# binding.pry
-# ""

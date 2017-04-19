@@ -1,4 +1,3 @@
-require 'pry'
 require 'csv'
 require_relative 'district'
 require_relative 'enrollment_repository'
@@ -69,6 +68,3 @@ class DistrictRepository
     end
   end
 end
-
-# binding.pry
-# ''
