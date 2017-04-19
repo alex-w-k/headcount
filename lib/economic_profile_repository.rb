@@ -6,9 +6,11 @@ class EconomicProfileRepository
   attr_reader :profiles
 
   def load_data(args)
-    @median_household_income_data = args[:economic_profile][:median_household_income]
+    @median_household_income_data =
+      args[:economic_profile][:median_household_income]
     @children_in_poverty_data = args[:economic_profile][:children_in_poverty]
-    @free_or_reduced_price_lunch_data = args[:economic_profile][:free_or_reduced_price_lunch]
+    @free_or_reduced_price_lunch_data =
+      args[:economic_profile][:free_or_reduced_price_lunch]
     @title_i_data = args[:economic_profile][:title_i]
     @profiles = collect_economic_profiles(@title_i_data)
     uniqueize_economic_profiles
@@ -33,7 +35,9 @@ class EconomicProfileRepository
   end
 
   def add_median_household_income_to_profiles
-    median_household_contents = CSV.open(@median_household_income_data, {headers: true, header_converters: :symbol})
+    median_household_contents =
+      CSV.open(@median_household_income_data,
+        {headers: true, header_converters: :symbol})
     median_household_contents.each do |row|
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].split('-')
@@ -54,7 +58,9 @@ class EconomicProfileRepository
   end
 
   def add_childeren_in_poverty_to_profiles
-    children_in_poverty_contents = CSV.open(@children_in_poverty_data, {headers: true, header_converters: :symbol})
+    children_in_poverty_contents =
+      CSV.open(@children_in_poverty_data,
+        {headers: true, header_converters: :symbol})
     children_in_poverty_contents.each do |row|
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
@@ -71,7 +77,9 @@ class EconomicProfileRepository
   end
 
   def add_free_or_reduced_lunch_to_profiles
-    free_or_reduced_price_lunch_contents = CSV.open(@free_or_reduced_price_lunch_data, {headers: true, header_converters: :symbol})
+    free_or_reduced_price_lunch_contents =
+      CSV.open(@free_or_reduced_price_lunch_data,
+        {headers: true, header_converters: :symbol})
     free_or_reduced_price_lunch_contents.each do |row|
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
@@ -84,14 +92,16 @@ class EconomicProfileRepository
           if !profiles[index].free_or_reduced_price_lunch[row[:timeframe]].nil?
             profiles[index].free_or_reduced_price_lunch[row[:timeframe]].merge!(percentage: row[:data])
           else
-            profiles[index].free_or_reduced_price_lunch[row[:timeframe]] = {percentage: row[:data]}
+            profiles[index].free_or_reduced_price_lunch[row[:timeframe]] =
+              {percentage: row[:data]}
           end
         elsif row[:dataformat] == 'Number'
           row[:data] = row[:data].to_i
           if !profiles[index].free_or_reduced_price_lunch[row[:timeframe]].nil?
             profiles[index].free_or_reduced_price_lunch[row[:timeframe]].merge!(total: row[:data])
           else
-            profiles[index].free_or_reduced_price_lunch[row[:timeframe]] = {total: row[:data]}
+            profiles[index].free_or_reduced_price_lunch[row[:timeframe]] =
+              {total: row[:data]}
           end
         end
       end
@@ -101,7 +111,8 @@ class EconomicProfileRepository
   end
 
   def add_title_i_data_to_profiles
-    title_i_contents = CSV.open(@title_i_data, {headers: true, header_converters: :symbol})
+    title_i_contents = CSV.open(@title_i_data,
+      {headers: true, header_converters: :symbol})
     title_i_contents.each do |row|
       row[:name] = row[:location].upcase
       row[:timeframe] = row[:timeframe].to_i
@@ -121,6 +132,3 @@ class EconomicProfileRepository
   end
 
 end
-
-# binding.pry
-# ''
