@@ -1,4 +1,3 @@
-require 'pry'
 require 'csv'
 require_relative 'economic_profile'
 
@@ -109,7 +108,6 @@ class EconomicProfileRepository
       end
     end
     profiles
-
   end
 
   def add_title_i_data_to_profiles

@@ -68,7 +68,4 @@ class StatewideTest
       raise UnknownDataError
     end
   end
-
-
-
 end

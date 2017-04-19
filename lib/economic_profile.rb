@@ -76,7 +76,4 @@ class EconomicProfile
       @title_i[year]
     end
   end
-
-
-
 end
