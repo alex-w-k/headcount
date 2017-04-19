@@ -108,126 +108,23 @@ class HeadcountAnalyst
     end
 
   def top_statewide_test_year_over_year_growth(args)
-    districts_growth = []
     if args[:grade] == 3
       if args[:subject].nil?
-        districts_growth = []
-        @dr.districts.each do |district|
-        value = false
-        year_data = district.statewide_test.third_grade.to_a
-        until value
-          if year_data.length == 0
-            value = true
-          elsif year_data[0][1][:math] == "N/A" || year_data[0][1][:reading] == "N/A" || year_data[0][1][:writing] == "N/A"
-            year_data.slice!(0)
-          else
-            value = true
-          end
+        if args[:weighting].nil?
+          top_statewide_test_year_over_year_growth_for_third_grade_all_subjects(args)
+        else
+          top_statewide_test_year_over_year_growth_for_third_grade_all_subjects_weighted_validator(args)
         end
-        value = false
-        until value
-          if year_data.length == 0
-            value = true
-          elsif year_data[-1][1][:math] == "N/A" || year_data[-1][1][:reading] == "N/A" || year_data[-1][1][:writing] == "N/A"
-            year_data.slice!(-1)
-          else
-            value = true
-          end
-        end
-        year_data = year_data.to_h
-        if year_data.length > 1
-          math_growth = (year_data.max[1][:math] - year_data.min[1][:math]) /
-                    (year_data.max[0] - year_data.min[0])
-          reading_growth = (year_data.max[1][:reading] - year_data.min[1][:reading]) /
-                    (year_data.max[0] - year_data.min[0])
-          writing_growth = (year_data.max[1][:writing] - year_data.min[1][:writing]) /
-                    (year_data.max[0] - year_data.min[0])
-          growth = (math_growth + reading_growth + writing_growth)/3
-          districts_growth << [district.name, growth]
-          ####Illustrates that we get the number they do, but we found one with more growth
-          if district.name == "SANGRE DE CRISTO RE-22J"
-            p [district.name, growth]
-          end
-        end
-      end
-      if args[:top].nil?
-        top = districts_growth.max_by do |district|
-          district[1]
-        end
-        top_district = [top[0], (top[1]*1000).floor/1000.0]
-      else
-        number = args[:top]
-        top_districts = []
-        number.times do 
-          top = districts_growth.max_by do |district|
-            district[1]
-          end
-          best_district = [top[0], (top[1]*1000).floor/1000.0]
-          top_districts << best_district
-          index_value = districts_growth.index(top)
-          districts_growth.slice!(index_value)
-        end
-        top_districts
-      end
       else
         grade_three_year_over_year(args)
       end
     elsif args[:grade] == 8
       if args[:subject].nil?
-        districts_growth = []
-        @dr.districts.each do |district|
-        value = false
-        year_data = district.statewide_test.eigth_grade.to_a
-        until value
-          if year_data.length == 0
-            value = true
-          elsif year_data[0][1][:math] == "N/A" || year_data[0][1][:reading] == "N/A" || year_data[0][1][:writing] == "N/A"
-            year_data.slice!(0)
-          else
-            value = true
-          end
+        if args[:weighting].nil?
+          top_statewide_test_year_over_year_growth_for_eighth_grade_all_subjects(args)
+        else
+          top_statewide_test_year_over_year_growth_for_eighth_grade_all_subjects_weighted_validator(args)
         end
-        value = false
-        until value
-          if year_data.length == 0
-            value = true
-          elsif year_data[-1][1][:math] == "N/A" || year_data[-1][1][:reading] == "N/A" || year_data[-1][1][:writing] == "N/A"
-            year_data.slice!(-1)
-          else
-            value = true
-          end
-        end
-        year_data = year_data.to_h
-        if year_data.length > 1
-          math_growth = (year_data.max[1][:math] - year_data.min[1][:math]) /
-                    (year_data.max[0] - year_data.min[0])
-          reading_growth = (year_data.max[1][:reading] - year_data.min[1][:reading]) /
-                    (year_data.max[0] - year_data.min[0])
-          writing_growth = (year_data.max[1][:writing] - year_data.min[1][:writing]) /
-                    (year_data.max[0] - year_data.min[0])
-          growth = (math_growth + reading_growth + writing_growth)/3
-          districts_growth << [district.name, growth]
-        end
-      end
-      if args[:top].nil?
-        top = districts_growth.max_by do |district|
-          district[1]
-        end
-        top_district = [top[0], (top[1]*1000).floor/1000.0]
-      else
-        number = args[:top]
-        top_districts = []
-        number.times do 
-          top = districts_growth.max_by do |district|
-            district[1]
-          end
-          best_district = [top[0], (top[1]*1000).floor/1000.0]
-          top_districts << best_district
-          index_value = districts_growth.index(top)
-          districts_growth.slice!(index_value)
-        end
-        top_districts
-      end
       else
         grade_eight_year_over_year(args)
       end
@@ -236,70 +133,111 @@ class HeadcountAnalyst
     else
       raise UnknownDataError
     end
-
   end
 
   def grade_three_year_over_year(args)
     districts_growth = []
     @dr.districts.each do |district|
-        value = false
         year_data = district.statewide_test.third_grade.to_a
-        until value
-          if year_data.length == 0
-            value = true
-          elsif year_data[0][1][args[:subject]] == "N/A"
-            year_data.slice!(0)
-          else
-            value = true
-          end
-        end
-        value = false
-        until value
-          if year_data.length == 0
-            value = true
-          elsif year_data[-1][1][args[:subject]] == "N/A"
-            year_data.slice!(-1)
-          else
-            value = true
-          end
-        end
-        year_data = year_data.to_h
-        if !year_data.empty? && year_data.length != 1
-          growth = (year_data.max[1][args[:subject]] - year_data.min[1][args[:subject]]) /
-                    (year_data.max[0] - year_data.min[0])
-          districts_growth << [district.name, growth]
-        end
+        top_statewide_test_year_over_year_growth_one_subject(args, district, districts_growth, year_data)
       end
-      if args[:top].nil?
-        top = districts_growth.max_by do |district|
-          district[1]
-        end
-        top_district = [top[0], (top[1]*1000).floor/1000.0]
-      else
-        number = args[:top]
-        top_districts = []
-        number.times do 
-          top = districts_growth.max_by do |district|
-            district[1]
-          end
-          best_district = [top[0], (top[1]*1000).floor/1000.0]
-          top_districts << best_district
-          index_value = districts_growth.index(top)
-          districts_growth.slice!(index_value)
-        end
-        top_districts
-      end
+      select_top_district_or_districts(args, districts_growth)
     end
 
   def grade_eight_year_over_year(args)
     districts_growth = []
     @dr.districts.each do |district|
-      value = false
       year_data = district.statewide_test.eighth_grade.to_a
+      top_statewide_test_year_over_year_growth_one_subject(args, district, districts_growth, year_data)
+    end
+    select_top_district_or_districts(args, districts_growth)
+  end
+
+  def top_statewide_test_year_over_year_growth_one_subject(args, district, districts_growth, year_data)        
+    value = false
+    until value
+      if year_data.length == 0
+        value = true
+      elsif year_data[0][1][args[:subject]] == "N/A"
+        year_data.slice!(0)
+      else
+        value = true
+      end
+    end
+    value = false
+    until value
+      if year_data.length == 0
+        value = true
+      elsif year_data[-1][1][args[:subject]] == "N/A"
+        year_data.slice!(-1)
+      else
+        value = true
+      end
+    end
+    year_data = year_data.to_h
+    if year_data.length > 1
+      growth = (year_data.max[1][args[:subject]] - year_data.min[1][args[:subject]]) /
+                (year_data.max[0] - year_data.min[0])
+      districts_growth << [district.name, growth]
+    end
+  end 
+
+  def top_statewide_test_year_over_year_growth_for_third_grade_all_subjects(args)
+    districts_growth = []
+    @dr.districts.each do |district|
+      year_data = district.statewide_test.third_grade.to_a
+      top_statewide_test_year_over_year_growth_all_subjects_weighted(args, year_data, district, districts_growth)
+    end
+    select_top_district_or_districts(args, districts_growth)
+  end
+
+
+
+  def top_statewide_test_year_over_year_growth_for_eighth_grade_all_subjects(args)
+    districts_growth = []
+    @dr.districts.each do |district|
+    year_data = district.statewide_test.eighth_grade.to_a
+    top_statewide_test_year_over_year_growth_all_subjects_weighted(args, year_data, district, districts_growth)
+    end
+    select_top_district_or_districts(args, districts_growth)
+  end
+
+
+  def top_statewide_test_year_over_year_growth_for_third_grade_all_subjects_weighted_validator(args)
+    if args[:weighting][:math] + args[:weighting][:reading] + args[:weighting][:writing] != 1
+      raise UnknownDataError
+    else
+      districts_growth = []
+      @dr.districts.each do |district|
+      year_data = district.statewide_test.third_grade.to_a
+        top_statewide_test_year_over_year_growth_all_subjects_weighted(args, year_data, district, districts_growth)
+      end
+      select_top_district_or_districts(args, districts_growth)
+    end
+  end
+
+
+
+  def top_statewide_test_year_over_year_growth_for_eighth_grade_all_subjects_weighted_validator(args)
+    if args[:weighting][:math] + args[:weighting][:reading] + args[:weighting][:writing] != 1
+      raise UnknownDataError
+    else
+      districts_growth = []
+      @dr.districts.each do |district|
+      year_data = district.statewide_test.eighth_grade.to_a
+        top_statewide_test_year_over_year_growth_all_subjects_weighted(args, year_data, district, districts_growth)
+      end
+      select_top_district_or_districts(args, districts_growth)
+    end
+  end
+
+
+  def top_statewide_test_year_over_year_growth_all_subjects_weighted(args, year_data, district, districts_growth)
+      value = false
       until value
         if year_data.length == 0
           value = true
-        elsif year_data[0][1][args[:subject]] == "N/A"
+        elsif year_data[0][1][:math] == "N/A" || year_data[0][1][:reading] == "N/A" || year_data[0][1][:writing] == "N/A"
           year_data.slice!(0)
         else
           value = true
@@ -309,45 +247,58 @@ class HeadcountAnalyst
       until value
         if year_data.length == 0
           value = true
-        elsif year_data[-1][1][args[:subject]] == "N/A"
+        elsif year_data[-1][1][:math] == "N/A" || year_data[-1][1][:reading] == "N/A" || year_data[-1][1][:writing] == "N/A"
           year_data.slice!(-1)
         else
           value = true
         end
       end
       year_data = year_data.to_h
-      if !year_data.empty? && year_data.length != 1
-        growth = (year_data.max[1][args[:subject]] - year_data.min[1][args[:subject]]) /
+      if year_data.length > 1
+        math_growth = (year_data.max[1][:math] - year_data.min[1][:math]) /
                   (year_data.max[0] - year_data.min[0])
-        districts_growth << [district.name, growth]
-      end
-    end
-    if args[:top].nil?
-      top = districts_growth.max_by do |district|
-        district[1]
-      end
-      top_district = [top[0], (top[1]*1000).floor/1000.0]
-    else
-      number = args[:top]
-      top_districts = []
-      number.times do 
-        top = districts_growth.max_by do |district|
-          district[1]
+        reading_growth = (year_data.max[1][:reading] - year_data.min[1][:reading]) /
+                  (year_data.max[0] - year_data.min[0])
+        writing_growth = (year_data.max[1][:writing] - year_data.min[1][:writing]) /
+                  (year_data.max[0] - year_data.min[0])
+        growth = (math_growth + reading_growth + writing_growth)/3
+        if args[:weighting].nil?
+          districts_growth << [district.name, growth]
+        else
+          weighted_growth = (math_growth * args[:weighting][:math]) + (reading_growth * args[:weighting][:reading]) + (writing_growth * args[:weighting][:writing])
+          districts_growth << [district.name, growth, weighted_growth]
         end
-        best_district = [top[0], (top[1]*1000).floor/1000.0]
-        top_districts << best_district
-        index_value = districts_growth.index(top)
-        districts_growth.slice!(index_value)
       end
-      top_districts
-    end
+     select_top_district_or_districts(args, districts_growth) 
   end
 
-
+  def select_top_district_or_districts(args, districts_growth)
+      if args[:top].nil?
+        if args[:weighting].nil?
+          top = districts_growth.max_by do |district|
+            district[1]
+          end
+        top_district = [top[0], (top[1]*1000).floor/1000.0]
+        else
+          top = districts_growth.max_by do |district|
+            district[2]
+          end
+        top_district = [top[0], (top[2]*1000).floor/1000.0]
+        end
+      else
+        number = args[:top]
+        top_districts = []
+        number.times do 
+          top = districts_growth.max_by do |district|
+            district[1]
+          end
+          best_district = [top[0], (top[1]*1000).floor/1000.0]
+          top_districts << best_district
+          index_value = districts_growth.index(top)
+          districts_growth.slice!(index_value)
+        end
+        top_districts
+      end
+  end
+  
 end
-
-
-
-
-
-
