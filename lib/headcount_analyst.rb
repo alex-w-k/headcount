@@ -290,8 +290,7 @@ class HeadcountAnalyst
                   (year_data.max[0] - year_data.min[0])
         growth = (math_growth + reading_growth + writing_growth)/3
         if args[:weighting].nil?
-          districts_growth << [district.name, growth] unless district.name ==
-           "CENTER 26 JT" || district.name == "MANCOS RE-6"
+          districts_growth << [district.name, growth] unless unwanted(district)
         else
           weighted_growth = (math_growth * args[:weighting][:math]) +
                             (reading_growth * args[:weighting][:reading]) +
@@ -329,6 +328,10 @@ class HeadcountAnalyst
         end
         top_districts
       end
+  end
+
+  def unwanted(district)
+    district.name == "CENTER 26 JT" || district.name == "MANCOS RE-6"
   end
 
 end
