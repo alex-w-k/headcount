@@ -1,10 +1,5 @@
 require 'csv'
 
-##
-# The Enrollment class creates all the Enrollment objects with the kindergarten
-# participation and highschool graduation data as well as functions to access
-# said data.
-
 class Enrollment
   attr_reader :name
   attr_accessor :high_school_graduation_rates, :kindergarten_participation
